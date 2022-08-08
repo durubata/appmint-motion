@@ -10,15 +10,23 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "strictNullChecks": false,
     "resolveJsonModule": true,
+    "baseUrl": "./src",
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": [
+      "reflect-metadata",
+      "resize-observer-browser",
+      "webpack-env", "jest", "node"
+    ],
+    "noImplicitAny": false
   },
   "include": [
     "src"

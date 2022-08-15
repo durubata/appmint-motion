@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const SCSidebar = styled.div<Props>`
-  max-width: ${props => props.width}
+  max-width: ${props => props.width};
 `;
 
 export const SCSidebarOpen = styled.div`
@@ -16,8 +16,7 @@ export const SCSidebarClose = styled.div`
   background: #f5f5f5;
 `;
 
-export const SCSidebarButton = styled.div`
-  `;
+export const SCSidebarButton = styled.div``;
 
 export const SCDataViewToolbar = styled.div`
   display: flex;
@@ -30,9 +29,8 @@ export const SCDataViewToolbar = styled.div`
   }
 `;
 
-
 export const GridItemWrapper = styled.div`
-background: #f5f5f5;
+  background: #f5f5f5;
 `;
 
 export const SCDataView = styled.div`
@@ -42,7 +40,7 @@ export const SCDataView = styled.div`
 `;
 
 export const SCRoot = styled.div`
-  width:  400px;
+  width: 400px;
   height: 700px;
   position: fixed;
   bottom: 100px;
@@ -52,7 +50,7 @@ export const SCRoot = styled.div`
   background: #efefef;
   overflow: hidden;
   box-shadow: 0px 0 5px 0px #ccc;
-  `;
+`;
 
 export const SCHeader = styled.div`
   height: 60px;
@@ -62,8 +60,7 @@ export const SCHeader = styled.div`
   justify-content: space-between;
   padding: 0.25rem 0.5rem;
   box-shadow: 0px 0px 5px 1px #e6e6e6;
-  `;
-
+`;
 
 export const SCActionButton = styled.div`
 & button{
@@ -83,15 +80,14 @@ export const SCActionButton = styled.div`
       background-color: #eee;
     }
   }
-`
-
+`;
 
 export const SCProfileMini = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
-  > div.profile-image{
+  > div.profile-image {
     width: 50px;
     height: 50px;
     border-radius: 50px;
@@ -102,23 +98,21 @@ export const SCProfileMini = styled.div`
   }
 `;
 
-
 export const SCProfile = styled.div`
-  width:  100%;
+  width: 100%;
   height: 100px;
-  `;
-
+`;
 
 export const SCConvo = styled.div`
-  width:  100%;
+  width: 100%;
   height: calc(100% - 60px);
   background-color: #fff;
   position: relative;
-  `
+`;
 
 export const SCSearch = styled.div`
   padding: 0.5rem;
-  input{
+  input {
     width: 100%;
     border: 0;
     border-radius: 0.25rem;
@@ -126,12 +120,12 @@ export const SCSearch = styled.div`
     box-shadow: 0 0 5px 1px #ccc;
     box-sizing: border-box;
   }
-  `
+`;
 export const SCMessage = styled.div`
-  width:  calc(100% - 1.5rem);
+  width: calc(100% - 1.5rem);
   height: 90px;
   position: absolute;
-  padding: .75rem;
+  padding: 0.75rem;
   bottom: 0;
   left: 0;
   border-top: 1px solid #ddd;
@@ -139,22 +133,20 @@ export const SCMessage = styled.div`
   & .chat-message {
     margin-bottom: 0.25rem;
     position: relative;
-   
   }
-  & textarea{
+  & textarea {
     width: 100%;
     border: 0;
     box-shadow: 0 0 5px 1px #ccc;
     border-radius: 2px;
     padding: 5px 10px;
     box-sizing: border-box;
-    &:focus-visible{
+    &:focus-visible {
       outline: none;
       border: none;
     }
   }
-  & button.chat-send-button{
-  
+  & button.chat-send-button {
     position: absolute;
     right: 0;
     top: 0px;
@@ -165,50 +157,55 @@ export const SCMessage = styled.div`
     margin: 0;
     flex-grow: 0;
     min-width: initial;
-    &:hover{
+    &:hover {
       background-color: #eee;
-    }   
-  }  
+    }
+  }
 `;
 
 export const SCHisotry = styled.div`
   height: calc(100% - 190px);
   overflow: auto;
   padding: 0.25rem 1rem;
-`
+`;
 
 export const SCChatBubble = styled.div`
-    display: flex;
-    justify-content: space-between;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 
-  & .bubble-left{
+  & .bubble-left {
     background-color: #e8ffd8;
     border-radius: 1rem;
     padding: 1rem;
     max-width: 70%;
     margin: 0.5rem 0;
-  },
-  & .bubble-right{
+  }
+  ,
+  & .bubble-right {
     background-color: #e1f5ff;
     border-radius: 1rem;
     padding: 1rem;
     max-width: 70%;
     margin: 0.5rem 0;
-  },
-  & .message-delivered{
+  }
+  ,
+  & .message-delivered {
     border-left: 1px solid #36ff4d;
-  },
-  & .message-read{
-     border-left: 1px solid #9bb6ff
-  },
-  & .message-error{
-     border-left: 1px solid #ff0000;
-  },
-  & .message-pending{
-     border-left: 1px solid #fb9700;
-  }        
-`
+  }
+  ,
+  & .message-read {
+    border-left: 1px solid #9bb6ff;
+  }
+  ,
+  & .message-error {
+    border-left: 1px solid #ff0000;
+  }
+  ,
+  & .message-pending {
+    border-left: 1px solid #fb9700;
+  }
+`;
 
 export const SCSideBar = styled.div`
   transition: all 0.3s ease;
@@ -220,43 +217,49 @@ export const SCSideBar = styled.div`
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 5px 0px #ccc;
-  & .chat-contact{
+  & .chat-contact {
     display: flex;
     border-radius: 0;
     padding: 0.75rem;
     gap: 1rem;
     align-items: center;
     border-bottom: 1px solid #eee;
-  },
-  & .chat-contact-image{
+  }
+  ,
+  & .chat-contact-image {
     border-radius: 50px;
     width: 40px;
     height: 40px;
     overflow: hidden;
-  },
-  & .chat-contact-name{
+  }
+  ,
+  & .chat-contact-name {
     font-size: 10px;
     font-weight: bold;
-  },
-  & .chat-contact-email{
+  }
+  ,
+  & .chat-contact-email {
     font-size: 9px;
-  },
-  & .chat-contact-location{
+  }
+  ,
+  & .chat-contact-location {
     font-size: 9px;
-  },
-  & .chat-contact-toggle-button{
-      position: absolute;
-      top: 0;
-      right: 80px;
-  },
+  }
+  ,
+  & .chat-contact-toggle-button {
+    position: absolute;
+    top: 0;
+    right: 80px;
+  }
+  ,
   input {
     width: 78%;
-    margin: 0
+    margin: 0;
   }
-  .chat-sidebar-content{
+  .chat-sidebar-content {
     width: 100%;
     top: 100%;
     overflow: auto;
     height: calc(100% - 120px);
   }
-`
+`;

@@ -1,20 +1,16 @@
 import React from 'react';
-import { useViewStore } from 'views-store';
+import {WelcomeHeader} from 'components/welcomePage';
+import {WelcomeConvo} from 'components/welcomePage';
+import { ScWelcome } from 'components/welcomePage/styles/style';
 
 const WelcomePage = () => {
-  const { setStateItem } = useViewStore(state => state);
+
 
   return (
-    <div>
-      WelcomePage to this page
-      <button
-        onClick={() => {
-          setStateItem('Chat');
-        }}
-      >
-        Go to Chat
-      </button>
-    </div>
+    <ScWelcome>
+      <WelcomeHeader />
+      <WelcomeConvo />
+    </ScWelcome>
   );
 };
 

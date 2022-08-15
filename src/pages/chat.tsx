@@ -10,7 +10,7 @@ import { useViewStore } from 'views-store';
 const iconSize = 16;
 export const ChatPage = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const { setStateItem } = useViewStore(state => state);
+  const { setStateItem } = useViewStore((state:any) => state);
 
   return (
     <SCRoot>

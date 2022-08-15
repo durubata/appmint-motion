@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route,  } from 'react-router-dom';
 import { HelpPage } from 'pages/help';
 import { SettingPage } from 'pages/setting';
 import { ChatPage } from 'pages/chat';

@@ -7,6 +7,6 @@ interface ChatStoreProps {
 }
 
 export const useViewStore = create<ChatStoreProps>(set => ({
-  currentView: 'Welcome',
+  currentView: 'Chat',
   setStateItem: (screen: keyof typeof HOME_VIEWS) => set((state: any) => ({ currentView: screen })),
 }));

@@ -15,6 +15,9 @@ import { MdOutlineScreenShare } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
 import { MdMoreVert } from 'react-icons/md';
 import { MdOndemandVideo } from 'react-icons/md';
+import {MdOutlineArrowForwardIos} from 'react-icons/md';
+import SendIcon from '@mui/icons-material/Send';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 
@@ -38,5 +41,9 @@ export {
   FaSearch as IconSearch,
   MdMoreVert as IconMoreV,
   MdOndemandVideo as IconVideo,
+  MdOutlineArrowForwardIos as IconForward,
+  SendIcon as IconSends,
+  SearchIcon as IconSearchs
+ 
 
 };

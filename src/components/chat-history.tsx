@@ -32,7 +32,7 @@ export const ChatHistory = () => {
     <SCHisotry onClick={e => setChats(getRandomInt(20))}>
       <div className="chat-history-scroll">
         {getChageMessages()}
-      </div>
+      </div> 
     </SCHisotry>
 
   );

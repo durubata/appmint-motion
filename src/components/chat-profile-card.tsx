@@ -7,7 +7,7 @@ import profileImage from 'assets/img_1292.jpg'
 export const ChatProfileCardSmall = () => {
   return (
     <div className="chat-profile-card-small">
-      <div className="profile-card-image"><img src={profileImage} /></div>
+      <div className="profile-card-image"><img src={profileImage} alt=''/></div>
       <div className="profile-card-username">jaclight</div>
     </div>
   );

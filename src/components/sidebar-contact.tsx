@@ -25,7 +25,6 @@ export const ChatContactSideBar = () => {
     setStateItem({ sidebarOpen: !sidebarOpen })
     console.log(sidebarOpen)
   }
-
   return (
     <SCSideBar style={{ right: sidebarOpen ? -440 : -80 }} >
       <div className="chat-contact-sidebar-header">

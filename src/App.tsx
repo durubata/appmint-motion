@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-
 import { HelpPage } from 'pages/help';
 import { SettingPage } from 'pages/setting';
 import { HomePage } from 'pages/home';

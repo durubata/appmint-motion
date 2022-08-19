@@ -1,20 +1,24 @@
 import styled from '@emotion/styled';
 
+export const SCRegistrationContainer = styled.div`
+  background-color: white;
+  height: 100%;
+`;
 export const SCRegistrationHeader = styled.div`
   display: flex;
-  row-gap: 20px;
+  /* row-gap: 20px; */
   flex-direction: column;
   background-color: #03a84e;
   height: 170px;
 `;
 
 export const ScRegistrationHeaderTitle = styled.div`
-  padding: 0 70px;
   text-align: center;
   color: white;
-  line-height: 1.618;
   font-weight: 400;
   font-size: 16px;
+  max-width: 75%;
+  margin: 0 auto;
 `;
 
 export const SCRegistrationBackButton = styled.div`
@@ -35,7 +39,7 @@ export const SCRegistrationForm = styled.div`
   padding: 16px 20px 16px 20px;
   background-color: #fff;
   border-radius: 7px;
-  border-top-right-radius: 0;
-  border-left: 4px solid #03a84e;
-  margin: -16px 16px 0 16px;
+  border: 1px solid lightgray;
+  max-width: 80%;
+  margin: -30px auto 0;
 `;

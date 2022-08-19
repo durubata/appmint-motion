@@ -2,13 +2,11 @@ import { Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGro
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoMdSend } from 'react-icons/io';
 import { useFormStore, useViewStore } from 'views-store';
-import { SCRegistrationHeader, SCRegistrationBackButton, SCRegistrationForm, SCRegistrationFormBG, ScRegistrationHeaderTitle } from './styles/registrationStyle';
+import { SCRegistrationHeader, SCRegistrationBackButton, SCRegistrationForm, SCRegistrationFormBG, ScRegistrationHeaderTitle, SCRegistrationContainer } from './styles/registrationStyle';
 
 const Registration = () => {
-  const { setStateItem } = useViewStore(state => state);
+  const { setScreenItem } = useViewStore(state => state);
   const { formItems, setFormItems } = useFormStore(state => state);
-
-  console.log(formItems);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -23,10 +21,10 @@ const Registration = () => {
   }, [formItems]);
 
   return (
-    <div>
+    <SCRegistrationContainer>
       <SCRegistrationHeader>
         <SCRegistrationBackButton>
-          <IoIosArrowBack onClick={() => setStateItem('Welcome')} />
+          <IoIosArrowBack onClick={() => setScreenItem('Welcome')} />
         </SCRegistrationBackButton>
         <ScRegistrationHeaderTitle>
           <span>Please fill out the form below to start chatting with the next available agent.</span>
@@ -39,7 +37,7 @@ const Registration = () => {
             onSubmit={e => {
               e.preventDefault();
               setFormItems({ email, name, phone });
-              setStateItem('Chat');
+              setScreenItem('Chat');
             }}
           >
             <Grid container spacing={3} justifyContent="center">
@@ -71,7 +69,7 @@ const Registration = () => {
           </form>
         </SCRegistrationForm>
       </SCRegistrationFormBG>
-    </div>
+    </SCRegistrationContainer>
   );
 };
 

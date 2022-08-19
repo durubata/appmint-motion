@@ -1,14 +1,15 @@
-import { WelcomeConvo, WelcomeHeader } from 'components/welcomePage';
+import { WelcomeConvo, WelcomeFooter, WelcomeHeader } from 'components/welcomePage';
 import { ScWelcome } from 'components/welcomePage/styles/style';
-import React from 'react';
 
-const WelcomePage = () => {
+export const WelcomePage = () => {
   return (
-    <ScWelcome>
-      <WelcomeHeader />
-      <WelcomeConvo />
+    <ScWelcome className="container">
+      <div className="header-main">
+        <WelcomeHeader />
+        <WelcomeConvo />
+      </div>
+
+      <WelcomeFooter />
     </ScWelcome>
   );
 };
-
-export default WelcomePage;

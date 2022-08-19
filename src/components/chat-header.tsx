@@ -24,7 +24,7 @@ export const ChatHeader = () => {
   return (
     <SCHeader>
       <SCProfileMini>
-        <div className='profile-image'><img src={profileImage} /></div>
+        <div className='profile-image'><img src={profileImage} alt='' /></div>
         <div className="profile-name">jaclight</div>
       </SCProfileMini>
       <SCActionButton>

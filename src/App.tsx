@@ -4,6 +4,7 @@ import { SettingPage } from 'pages/setting';
 import { ChatPage } from 'pages/chat';
 import { HomePage } from 'pages/home';
 
+// Add comment
 export const ChatApp = () => {
   return (
     <div className="data-viz">

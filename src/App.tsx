@@ -3,6 +3,7 @@ import { HelpPage } from 'pages/help';
 import { SettingPage } from 'pages/setting';
 import { ChatPage } from 'pages/chat';
 
+// New Comments
 export const ChatApp = () => {
   return (
     <div className="data-viz">

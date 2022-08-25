@@ -13,4 +13,4 @@ export const HOME_VIEWS = {
 };
 
 export const HOME_VIEWS_ARRAY = Object.keys(HOME_VIEWS);
-console.log(HOME_VIEWS_ARRAY);
+

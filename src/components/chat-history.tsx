@@ -1,17 +1,10 @@
-import { useFileUploadStore } from 'chat-store';
 import React, { useState } from 'react';
-import { RiFileDownloadLine } from 'react-icons/ri';
 import { SCChatBubble, SCHisotry } from 'styles';
-import { ChatContactSideBar } from './sidebar-contact';
-import { ChatInfo } from './sidebar-info';
-import ImgsViewer from 'react-images-viewer';
+import FileDisplay from './FileUpload/fileDisplay';
 
 const status = ['pending', 'delivered', 'read', 'error'];
 export const ChatHistory = () => {
-  const { fileItems } = useFileUploadStore(state => state);
-
   const [chats, setChats] = useState(3);
-  const [isImageOpen, setIsImageOpen] = useState(false);
 
   const getRandomInt = max => {
     return Math.floor(Math.random() * max);
@@ -38,7 +31,9 @@ export const ChatHistory = () => {
           return (
             <SCChatBubble>
               <div className="bubble-spacer"></div>
-              <div className={`bubble-right message-${status[msgStatus]}`}>{messages[msgIndex]}</div>
+              <div className={`bubble-right message-${status[msgStatus]}`}>
+                <FileDisplay />
+              </div>
             </SCChatBubble>
           );
         }
@@ -49,23 +44,6 @@ export const ChatHistory = () => {
   return (
     <SCHisotry onClick={e => setChats(getRandomInt(20))}>
       <div className="chat-history-scroll">{getChageMessages()}</div>
-      {fileItems && fileItems.fileType === 'image' && (
-        <div style={{ width: 100, height: 100, marginTop: '10px' }}>
-          <img src={fileItems.fileUrl} alt="images" width="100%" style={{ cursor: 'pointer' }} onClick={() => setIsImageOpen(true)} />
-          <ImgsViewer imgs={[{ src: fileItems.fileUrl }]} isOpen={isImageOpen} backdropCloseable={true} onClose={() => setIsImageOpen(false)} />
-        </div>
-      )}
-      {fileItems && fileItems.fileType === 'application' && (
-        <a href={fileItems.fileUrl} style={{ marginTop: '30px', cursor: 'pointer', color: 'grey', display: 'block' }} download>
-          <RiFileDownloadLine style={{ fontSize: '40px' }} />
-          <div>{fileItems.file.name}</div>
-        </a>
-      )}
-      {fileItems && fileItems.fileType === 'video' && (
-        <div style={{ width: 100, height: 100, marginTop: '10px' }}>
-          <video id="video" src={fileItems.fileUrl} controls width={200} height={200}></video>
-        </div>
-      )}
     </SCHisotry>
   );
 };

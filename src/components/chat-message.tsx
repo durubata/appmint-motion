@@ -1,18 +1,13 @@
 import { IconButton, Button } from '@mui/material';
-import { IconAttachment, IconEmoji, IconImage, IconSend, IconScreenShare } from './icons';
-import React, { useState, useRef, useEffect } from 'react';
-import data from '@emoji-mart/data';
-import { Picker } from 'emoji-mart';
+import { IconAttachment, IconEmoji, IconSend, IconScreenShare } from './icons';
+import React, { useState, useRef } from 'react';
 import { SCActionButton, SCMessage } from 'styles';
-import { useFileUploadStore } from 'chat-store';
+import FileUpload from './FileUpload/fileUpload';
 
 export type FILETYPE = 'video' | 'image' | 'application';
 const iconSize = 16;
 
 export const ChatMessage = props => {
-  const { fileItems, setFileItems, removeFileItems } = useFileUploadStore(state => state);
-
-  const [file, setFile] = useState<File>();
   const [message, setMessage] = useState('');
   const [style, setStyle] = useState<any>({ display: 'none', position: 'absolute' });
   const ref = useRef();
@@ -33,32 +28,6 @@ export const ChatMessage = props => {
     }
   };
 
-  const handleInputChange = () => {
-    if (file) {
-      const type = file.type.split('/')[0] as FILETYPE;
-
-      if (type === 'image') {
-        setFileItems({ fileType: 'image', fileUrl: URL.createObjectURL(file), file });
-      }
-      if (type === 'application') {
-        setFileItems({ fileType: 'application', fileUrl: URL.createObjectURL(file), file });
-      }
-      if (type === 'video') {
-        setFileItems({ fileType: 'video', fileUrl: URL.createObjectURL(file), file });
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleInputChange();
-
-    if (fileItems) {
-      return () => {
-        URL.revokeObjectURL(fileItems.fileUrl);
-        removeFileItems();
-      };
-    }
-  }, [file]);
 
   return (
     <>
@@ -76,13 +45,8 @@ export const ChatMessage = props => {
             <IconEmoji size={iconSize} />
           </IconButton>
 
-          <IconButton>
-            {/* <input hidden type="file" accept="image/*,video/*,application/*" onChange={e => setFile(e.target.files[0])} /> */}
-            <IconImage size={iconSize} />
-          </IconButton>
-
           <IconButton aria-label="upload file" component="label">
-            <input hidden type="file" accept="image/*,video/*,application/*" onChange={e => setFile(e.target.files[0])} />
+            <FileUpload />
             <IconAttachment size={iconSize} />
           </IconButton>
 

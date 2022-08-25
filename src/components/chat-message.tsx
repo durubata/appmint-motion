@@ -1,17 +1,21 @@
 import { IconButton, Button } from '@mui/material';
 import { IconAttachment, IconEmoji, IconImage, IconSend, IconScreenShare } from './icons';
-import React, { useState } from 'react';
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import { SCActionButton, SCMessage } from 'styles';
 import { useMessageStore } from 'chat-store';
+import React, { useState, useRef } from 'react';
+import FileUpload from './FileUpload/fileUpload';
 
+
+export type FILETYPE = 'video' | 'image' | 'application';
 const iconSize = 16;
 
-export const ChatMessage = () => {
+export const ChatMessage = props => {
+  const [style, setStyle] = useState<any>({ display: 'none', position: 'absolute' });
+  const ref = useRef();
 
   const [message, setInputMessage] = useState('')
-  const [style, setStyle] = useState<any>({ display: 'none', position: 'absolute' });
 
   const { setChatMessages } = useMessageStore(state => state)
 
@@ -19,13 +23,14 @@ export const ChatMessage = () => {
     setInputMessage(e.target.value)
   }
 
-  const handelEmojiButton = () => {
+
+  const handelEmojiButton = e => {
     if (style.display === 'none') {
-      setStyle({ display: 'block', position: 'absolute', bottom: "103px", right: '20px' })
+      setStyle({ display: 'block', position: 'absolute', bottom: '100px', right: '200px' });
     } else {
-      setStyle({ display: 'none', position: 'absolute', })
+      setStyle({ display: 'none', position: 'absolute' });
     }
-  }
+  };
 
   const handleEmojiValue = (e: any) => {
     setInputMessage(message + e.native);
@@ -50,6 +55,7 @@ export const ChatMessage = () => {
   }
 
   return (
+
     <SCMessage>
       <div style={style} className='emoji' >
         <Picker data={data} onEmojiSelect={handleEmojiValue} onFocus='true' previewPosition='none' theme='light'/>
@@ -62,10 +68,13 @@ export const ChatMessage = () => {
       </div>
       <SCActionButton>
         <IconButton onClick={handelEmojiButton} ><IconEmoji size={iconSize} /> </IconButton>
-        <IconButton onClick={null}><IconImage size={iconSize} /></IconButton>
-        <IconButton onClick={null}><IconAttachment size={iconSize} /></IconButton>
+        <IconButton aria-label="upload file" component="label">
+            <FileUpload />
+            <IconAttachment size={iconSize} />
+          </IconButton>
         <IconButton><IconScreenShare size={iconSize} /></IconButton>
       </SCActionButton>
     </SCMessage>
+
   );
 };

@@ -47,6 +47,7 @@
     "react-echarts": "^0.1.1",
     "react-i18next": "^11.18.0",
     "react-icons": "^4.4.0",
+    "react-images-viewer": "^1.7.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.4.2",

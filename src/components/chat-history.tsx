@@ -58,8 +58,9 @@ const messages = chatMessages.map(({message}) => message);
           <div className='bubble-spacer'></div>
           <div className={`bubble-right message-${message ? status[1] : null}`}>
             <div className='chats'>
+            <FileDisplay />
               {message.message}
-              <FileDisplay />
+         
               <span className='chat-time'>{message.time}</span>
             </div>
 

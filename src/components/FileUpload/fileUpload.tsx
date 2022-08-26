@@ -1,39 +1,20 @@
 import { useFileUploadStore } from 'chat-store';
 import { FILETYPE } from 'components/chat-message';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const FileUpload = () => {
-  const { fileItems, setFileItems, removeFileItems } = useFileUploadStore(state => state);
+  const { fileItems, setFileItems } = useFileUploadStore(state => state);
+  console.log(fileItems);
 
-  const [file, setFile] = useState<File>();
-
-  const handleInputChange = () => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files[0];
     if (file) {
       const type = file.type.split('/')[0] as FILETYPE;
-
-      if (type === 'image') {
-        setFileItems({ fileType: 'image', fileUrl: URL.createObjectURL(file), file });
-      }
-      if (type === 'application') {
-        setFileItems({ fileType: 'application', fileUrl: URL.createObjectURL(file), file });
-      }
-      if (type === 'video') {
-        setFileItems({ fileType: 'video', fileUrl: URL.createObjectURL(file), file });
-      }
+      setFileItems({ fileType: type, fileUrl: URL.createObjectURL(file), file });
     }
   };
 
-  useEffect(() => {
-    handleInputChange();
-
-    if (fileItems) {
-      return () => {
-        URL.revokeObjectURL(fileItems.fileUrl);
-        removeFileItems();
-      };
-    }
-  }, [file]);
-  return <input hidden type="file" accept="image/*,video/*,application/*" onChange={e => setFile(e.target.files[0])} />;
+  return <input hidden type="file" accept="image/*,video/*,application/*" onChange={handleInputChange} />;
 };
 
 export default FileUpload;

@@ -45,6 +45,7 @@ export const ChatHistory = () => {
             <div className={`bubble-left`}>
               <div className="chats">
                 {message.message}
+                {message.file}
                 <span className="chat-time">{message.time}</span>
               </div>
             </div>

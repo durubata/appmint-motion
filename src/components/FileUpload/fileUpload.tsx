@@ -27,6 +27,7 @@ const FileUpload = () => {
         message: 'Hello there!',
         receiver: 'user',
         senderId: 'bot',
+        file: <FileDisplay fileId={fileItems.length} />,
       });
     }, 1000);
   };

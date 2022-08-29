@@ -4,8 +4,6 @@ import { ChatContactSideBar } from './sidebar-contact';
 import { ChatInfo } from './sidebar-info';
 import { ChatMessage, useMessageStore } from 'chat-store';
 
-import FileDisplay from './FileUpload/fileDisplay';
-
 const status = ['pending', 'delivered', 'read', 'error'];
 export const ChatHistory = () => {
   const { chatMessages } = useMessageStore(state => state);
@@ -39,13 +37,12 @@ export const ChatHistory = () => {
 
   const getChatMessages = () => {
     return chatMessages.map((message: ChatMessage) => {
-      if (message.senderId === 'bot') {
+      if (message.sender === 'bot') {
         return (
           <SCChatBubble key={message.messageId}>
             <div className={`bubble-left`}>
               <div className="chats">
                 {message.message}
-                {message.file}
                 <span className="chat-time">{message.time}</span>
               </div>
             </div>

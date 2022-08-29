@@ -39,7 +39,7 @@ export const useChatStore = create<ChatStoreProps>(set => ({
 }));
 
 export interface ChatMessage {
-  senderId: string;
+  sender: string;
   message?: string;
   time?: string;
   receiver: string;
@@ -59,10 +59,10 @@ export const useMessageStore = create<MessageProps>(set => ({
       messageId: Math.floor(Math.random() * 1000000),
       time: getTime(),
       receiver: 'user',
-      senderId: 'bot',
+      sender: 'bot',
     },
   ],
-  setChatMessages: ({ message, receiver, senderId, file }) =>
+  setChatMessages: ({ message, receiver, sender, file }) =>
     set(state => ({
       chatMessages: [
         ...state.chatMessages,
@@ -71,7 +71,7 @@ export const useMessageStore = create<MessageProps>(set => ({
           messageId: Math.floor(Math.random() * 1000000),
           time: getTime(),
           receiver,
-          senderId,
+          sender,
           file,
         },
       ],

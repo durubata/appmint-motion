@@ -18,7 +18,7 @@ const FileUpload = () => {
   const handleSentMessage = () => {
     setChatMessages({
       receiver: 'bot',
-      senderId: 'user',
+      sender: 'user',
       file: <FileDisplay fileId={fileItems.length} />,
     });
 
@@ -26,7 +26,7 @@ const FileUpload = () => {
       setChatMessages({
         message: 'Hello there!',
         receiver: 'user',
-        senderId: 'bot',
+        sender: 'bot',
         file: <FileDisplay fileId={fileItems.length} />,
       });
     }, 1000);

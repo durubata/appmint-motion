@@ -38,7 +38,7 @@ export const ChatMessage = props => {
     setChatMessages({
       message,
       receiver: 'bot',
-      senderId: 'user',
+      sender: 'user',
     });
     setInputMessage('');
     setStyle({ display: 'none', position: 'absolute' });
@@ -47,7 +47,7 @@ export const ChatMessage = props => {
       setChatMessages({
         message: 'Hello there!',
         receiver: 'user',
-        senderId: 'bot',
+        sender: 'bot',
       });
     }, 1000);
   };

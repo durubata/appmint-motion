@@ -10,7 +10,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@emoji-mart/data": "^1.0.3",
+    "@emoji-mart/data": "^1.0.5",
     "@emoji-mart/react": "^1.0.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",

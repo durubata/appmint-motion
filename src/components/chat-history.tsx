@@ -1,17 +1,17 @@
-import React, { useEffect,useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { SCChatBubble, SCHisotry } from 'styles';
 import { ChatContactSideBar } from './sidebar-contact';
 import { ChatInfo } from './sidebar-info';
-import { useMessageStore } from 'chat-store';
+import { ChatMessage, useMessageStore } from 'chat-store';
 
 import FileDisplay from './FileUpload/fileDisplay';
 
-
 const status = ['pending', 'delivered', 'read', 'error'];
 export const ChatHistory = () => {
+  const { chatMessages } = useMessageStore(state => state);
+  const messagesColumnRef = useRef(null);
 
-  const { chatMessages } = useMessageStore(state => state)
-  const messagesColumnRef = useRef(null)
+  console.log(chatMessages);
 
   // const getRandomInt = (max) => {
   //   return Math.floor(Math.random() * max);
@@ -31,54 +31,51 @@ export const ChatHistory = () => {
   //     }
   //   }
   // })
-  
-const messages = chatMessages.map(({message}) => message);
-  useEffect(() => {
 
-    messagesColumnRef.current.scrollTop =
-      messagesColumnRef.current.scrollHeight;
-      
+  const messages = chatMessages.map(({ message }) => message);
+  useEffect(() => {
+    messagesColumnRef.current.scrollTop = messagesColumnRef.current.scrollHeight;
   }, [messages]);
 
-  
   const getChatMessages = () => {
-    return chatMessages.map((message:any) => {
+    return chatMessages.map((message: ChatMessage) => {
       if (message.senderId === 'bot') {
-        return <SCChatBubble key={message.senderId}>
-          <div className={`bubble-left message-${message.status}` } >
-             <div className='chats'>
-              {message.message}
-              <span className='chat-time'>{message.time}</span>
+        return (
+          <SCChatBubble key={message.messageId}>
+            <div className={`bubble-left`}>
+              <div className="chats">
+                {message.message}
+                <span className="chat-time">{message.time}</span>
               </div>
-          </div>
-          <div className='bubble-spacer'></div>
-        </SCChatBubble>;
-      } else {
-        return <SCChatBubble key={message.senderId}>
-          <div className='bubble-spacer'></div>
-          <div className={`bubble-right message-${message ? status[1] : null}`}>
-            <div className='chats'>
-            <FileDisplay />
-              {message.message}
-         
-              <span className='chat-time'>{message.time}</span>
             </div>
-
-          </div>
-        </SCChatBubble>;
+            <div className="bubble-spacer"></div>
+          </SCChatBubble>
+        );
+      } else {
+        return (
+          <SCChatBubble key={message.messageId}>
+            <div className="bubble-spacer"></div>
+            <div className={`bubble-right message-${message ? status[1] : null}`}>
+              <div className="chats">
+                {message.message}
+                {message.file}
+                <span className="chat-time">{message.time}</span>
+              </div>
+            </div>
+          </SCChatBubble>
+        );
       }
-    }
-    )
-  }
+    });
+  };
   return (
     <SCHisotry ref={messagesColumnRef}>
-      <div className="chat-history-scroll" >
+      <div className="chat-history-scroll">
         {/* {getChageMessages()} */}
         {getChatMessages()}
       </div>
     </SCHisotry>
   );
-}
+};
 export default ChatHistory;
 // const messages = [
 //   'If you can’t beat them, dress better than them',
@@ -94,4 +91,3 @@ export default ChatHistory;
 //   'That’s right, another year of friendship. Your membership has been renewed.',
 //   'Dear friends, your Christmas gift this year… is me'
 // ]
-

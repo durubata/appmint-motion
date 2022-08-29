@@ -29,9 +29,8 @@ export const ScWelcome = styled.div`
     gap: 20px;
     // height: 600px;
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: #fff;
-    scroll: smooth;
     ::-webkit-scrollbar {
       width: 4px;
     }

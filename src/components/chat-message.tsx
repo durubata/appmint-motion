@@ -24,7 +24,7 @@ export const ChatMessage = props => {
 
   const handelEmojiButton = e => {
     if (style.display === 'none') {
-      setStyle({ display: 'block', position: 'absolute', bottom: '100px', right: '200px' });
+      setStyle({ display: 'block', position: 'absolute', bottom: '100px', right: '0' });
     } else {
       setStyle({ display: 'none', position: 'absolute' });
     }

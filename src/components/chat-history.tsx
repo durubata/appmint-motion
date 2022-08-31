@@ -9,8 +9,6 @@ export const ChatHistory = () => {
   const { chatMessages } = useMessageStore(state => state);
   const messagesColumnRef = useRef(null);
 
-  console.log(chatMessages);
-
   // const getRandomInt = (max) => {
   //   return Math.floor(Math.random() * max);
   // }

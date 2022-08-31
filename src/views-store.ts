@@ -14,7 +14,7 @@ interface FormItems {
 
 interface FormStoreProps {
   formItems: FormItems;
-  setFormItems: (items: { name: string; email: string; phone: string }) => void;
+  setFormItems: (items: FormItems) => void;
 }
 
 export const useViewStore = create<ChatStoreProps>(set => ({

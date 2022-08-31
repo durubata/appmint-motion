@@ -36,7 +36,7 @@ export const GridItemWrapper = styled.div`
 export const SCDataView = styled.div`
   padding: 8px;
   width: 100%;
-  flex - grow: 2;
+  flex-grow: 2;
 `;
 
 export const SCRoot = styled.div`
@@ -68,7 +68,7 @@ export const SCActionButton = styled.div`
     margin: 0.5rem 0 0 0;
     padding: 10px;
     min-width: initial;
-    background: #fff
+    background: #fff;
     font-size: 1rem;
     box-shadow: 2px 1px 5px 1px #ccc;
     margin: 5px;
@@ -161,6 +161,10 @@ export const SCMessage = styled.div`
       background-color: #eee;
     }
   }
+  .emoji{
+    z-index: 1;
+    cursor: pointer;
+  }
 `;
 
 export const SCHisotry = styled.div`
@@ -173,6 +177,7 @@ export const SCChatBubble = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
+  
 
   & .bubble-left {
     background-color: #e8ffd8;
@@ -181,7 +186,7 @@ export const SCChatBubble = styled.div`
     max-width: 70%;
     margin: 0.5rem 0;
   }
-  ,
+  
   & .bubble-right {
     background-color: #e1f5ff;
     border-radius: 1rem;
@@ -189,21 +194,32 @@ export const SCChatBubble = styled.div`
     max-width: 70%;
     margin: 0.5rem 0;
   }
-  ,
+  
   & .message-delivered {
     border-left: 1px solid #36ff4d;
   }
-  ,
+  
   & .message-read {
     border-left: 1px solid #9bb6ff;
   }
-  ,
+  
   & .message-error {
     border-left: 1px solid #ff0000;
   }
-  ,
+  
   & .message-pending {
     border-left: 1px solid #fb9700;
+  }
+  .chats{
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    flex-wrap: wrap;
+   
+    
+  }
+  .chat-time{
+  font-size:10px
   }
 `;
 
@@ -225,33 +241,33 @@ export const SCSideBar = styled.div`
     align-items: center;
     border-bottom: 1px solid #eee;
   }
-  ,
+  
   & .chat-contact-image {
     border-radius: 50px;
     width: 40px;
     height: 40px;
     overflow: hidden;
   }
-  ,
+  
   & .chat-contact-name {
     font-size: 10px;
     font-weight: bold;
   }
-  ,
+  
   & .chat-contact-email {
     font-size: 9px;
   }
-  ,
+  
   & .chat-contact-location {
     font-size: 9px;
   }
-  ,
+  
   & .chat-contact-toggle-button {
     position: absolute;
     top: 0;
     right: 80px;
   }
-  ,
+  
   input {
     width: 78%;
     margin: 0;

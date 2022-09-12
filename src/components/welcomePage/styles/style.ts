@@ -5,6 +5,10 @@ interface IProps {
   extended?: boolean;
 }
 
+
+//TODO move this to the style file /styles/index.ts
+//TODO name component with SC  in capital
+
 export const FlexJA = css`
   justify-content: center;
   align-items: center;

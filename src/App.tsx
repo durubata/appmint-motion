@@ -4,7 +4,7 @@ import { SettingPage } from 'pages/setting';
 import { HomePage } from 'pages/home';
 import { css, Global } from '@emotion/react';
 
-// Add comment
+//TODO move css to css file, we already have a global CSS file that does exactly this
 export const ChatApp = () => {
   return (
     <>

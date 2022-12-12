@@ -62,6 +62,7 @@ interface ChatStoreProps {
   hasUpdate?: string[]
   myEmail?: string;
   activeFriend?: string,
+  newitem?: string[],
   onMessage?: (data) => any
   onUpdate?: (data) => any
   onDelete?: (data) => any
@@ -102,6 +103,7 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
   message: null,
   socket: null,
   conversations: {},
+  newitem: [],
   friends: {},
   setStateItem: (item) => set((state) => ({ ...item })),
   onMessage: (message) => set((state) => {

@@ -1,30 +1,51 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoMdSend } from 'react-icons/io';
-import { useFormStore, useViewStore } from 'views-store';
 import { SCRegistrationHeader, SCRegistrationBackButton, SCRegistrationForm, SCRegistrationFormBG, ScRegistrationHeaderTitle, SCRegistrationContainer } from './styles/registrationStyle';
+import { appConfig } from 'config';
+import { useChatStore } from 'chat-store';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
-  const { setScreenItem } = useViewStore(state => state);
-  const { formItems, setFormItems } = useFormStore(state => state);
-
+  const { setFormItems, setStateItem } = useChatStore(state => ({ setStateItem: state.setStateItem, setFormItems: state.setFormItems }));
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [error, setError] = useState();
 
-  useEffect(() => {
-    if (formItems) {
-      setName(formItems.name);
-      setEmail(formItems.email);
-      setPhone(formItems.phone);
+  const navigate = useNavigate()
+
+  const startChat = async (e) => {
+    e.preventDefault();
+    setError(null)
+    setFormItems({ email, name, phone });
+
+    const authURL = `${appConfig.appengine.host}/user/guest/auth`
+    const settings = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        orgid: appConfig.siteId,
+      },
+      body: JSON.stringify({ email, name, phone })
+    };
+    const authResponse: any = await fetch(authURL, settings);
+    if ([200, 201, 202].includes(authResponse.status)) {
+      const response = await authResponse.json();
+      setStateItem({ token: response.token, user: response.guest })
+      navigate('/chat');
+    } else {
+      console.log(authResponse)
+      setError(authResponse.statusText)
     }
-  }, [formItems]);
+  }
 
   return (
     <SCRegistrationContainer>
       <SCRegistrationHeader>
         <SCRegistrationBackButton>
-          <IoIosArrowBack onClick={() => setScreenItem('Welcome')} />
+          <IoIosArrowBack onClick={() => navigate('/')} />
         </SCRegistrationBackButton>
         <ScRegistrationHeaderTitle>
           <span>Please fill out the form below to start chatting with the next available agent.</span>
@@ -33,13 +54,7 @@ const Registration = () => {
 
       <SCRegistrationFormBG>
         <SCRegistrationForm>
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-              setFormItems({ email, name, phone });
-              setScreenItem('Chat');
-            }}
-          >
+          <form onSubmit={startChat}   >
             <Grid container spacing={3} justifyContent="center">
               <Grid item xs={12}>
                 <TextField required id="name" label="Name" fullWidth value={name} onChange={e => setName(e.target.value)} />
@@ -61,6 +76,7 @@ const Registration = () => {
                 </FormControl>
               </Grid>
               <Grid item style={{ paddingBottom: '20px' }}>
+                {error && <div style={{ color: 'red' }}>{error}</div>}
                 <Button type="submit" variant="contained" style={{ width: '330px', fontWeight: 'bold', backgroundColor: '#03a84e', padding: '10px 0px' }} color="success" startIcon={<IoMdSend />} fullWidth>
                   Start Chat
                 </Button>

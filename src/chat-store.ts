@@ -1,11 +1,12 @@
-import { getTime, greetings } from './constants/utils';
+import { getTime, greetings } from './utils';
 import produce from 'immer';
 import { FILETYPE } from 'components/chat-message';
 import create from 'zustand';
-
-
-//TODO move all state into ChatState
-interface ChatMessageProps {
+interface FormItems {
+  name: string;
+  email: string;
+  phone: string;
+}interface ChatMessageProps {
   sk?: string;
   pk?: string;
   datatype?: string;
@@ -74,6 +75,8 @@ interface ChatStoreProps {
   getMessages?: (friendEmail) => any
   addFriend?: (friendEmail) => any
   getFriend?: (friendEmail) => any
+  formItems?: FormItems;
+  setFormItems?: (items: FormItems) => void;
 }
 
 interface FileItemsProps {
@@ -105,7 +108,7 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
   conversations: {},
   newitem: [],
   friends: {},
-  setStateItem: (item) => set((state) => ({ ...item })),
+  setStateItem: (item) => set((state) => { return { ...item } }),
   onMessage: (message) => set((state) => {
     const conversations = JSON.parse(JSON.stringify(state.conversations))
     if (message.data.from === state.myEmail) {
@@ -148,6 +151,7 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
       return { conversations, hasUpdate }
     }
   }),
+
   onUpdate: (update) => set((state) => {
     // const statusUpdate = { type: 'message-status', from:'', to:'', uid: '', status: ChatMessageStatus.Delivered };
     const conversations = JSON.parse(JSON.stringify(state.conversations))
@@ -164,6 +168,7 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
       return { conversations, hasUpdate }
     }
   }),
+
   onDelete: (data) => set(state => { return { message: data } }),
   onMessages: (messages: any[]) => set(state => {
     const conversations = produce(state.conversations, draft => {
@@ -199,12 +204,13 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
   getMessages: (friendEmail: string) => get().conversations[friendEmail],
   sendMessage: (to: string, content: string, files) => set((state) => {
     if (!state.activeFriend) {
-      return { activeFriend: null }
+      to = 'init-guest-chat'
     }
+
     const time = (new Date()).getTime()
     const newMessage = createData()
     newMessage.data = {
-      to: to,
+      to: to || 'guest-chat',
       content,
       files,
       status: 'pending',
@@ -221,7 +227,7 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
     return { conversations }
   }),
   chatRequest: () => {
-    get().socket.emit('chatRequest', { chat: 'Info' });
+    get().socket.emit('chatRequest', { type: 'init-guest-chat', from: get().user.data.email });
   },
   addFriend: (friend) => set(state => {
     const friends = produce(state.friends, draft => {
@@ -229,7 +235,14 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
     })
     return { friends }
   }),
-  getFriend: (friendEmail) => (get().friends[friendEmail])
+  getFriend: (friendEmail) => (get().friends[friendEmail]),
+  currentView: 'Welcome',
+  formItems: {
+    name: '',
+    phone: '',
+    email: '',
+  },
+  setFormItems: (items: FormItems) => set(state => ({ formItems: items })),
 }));
 
 export interface ChatMessage {

@@ -12,7 +12,7 @@ import { useChatStore } from 'chat-store';
 const iconSize = 14;
 
 export const ChatContactSideBar = () => {
-  const { setStateItem, sidebarOpen } = useChatStore((state: any) => ({ setStateItem: state.setStateItem, sidebarOpen: state.sidebarOpen }))
+  const { setStateItem, sidebarOpen } = useChatStore((state: any) => ({ setStateItem: state.setStateItem, sidebarOpen: state.sidebarOpen }), (ov, nv) => false)
 
   const [activeTab, setActiveTab] = useState(0);
   const [searhKey, setSearchKey] = useState('')

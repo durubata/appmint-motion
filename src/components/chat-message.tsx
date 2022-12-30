@@ -1,7 +1,7 @@
 import { IconButton, Button } from '@mui/material';
 import { IconAttachment, IconEmoji, IconSend, IconScreenShare } from './icons';
 import { SCActionButton, SCMessage } from 'styles';
-import { useMessageStore } from 'chat-store';
+import { useChatStore } from 'chat-store';
 import React, { useState, useRef } from 'react';
 import FileUpload from './FileUpload/fileUpload';
 import data from '@emoji-mart/data';
@@ -13,13 +13,13 @@ const iconSize = 16;
 export const ChatMessage = props => {
   const [style, setStyle] = useState<any>({ display: 'none', position: 'absolute' });
   const ref = useRef();
+  const [files, setFiles] = useState<{ path: string, url?: string }[]>(props.files);
+  const [message, setMessage] = useState('');
 
-  const [message, setInputMessage] = useState('');
-
-  const { setChatMessages } = useMessageStore(state => state);
+  const { sendMessage } = useChatStore((state: any) => ({ sendMessage: state.sendMessage }));
 
   const handleChange = (e: any) => {
-    setInputMessage(e.target.value);
+    setMessage(e.target.value);
   };
 
   const handelEmojiButton = e => {
@@ -31,25 +31,14 @@ export const ChatMessage = props => {
   };
 
   const handleEmojiValue = (e: any) => {
-    setInputMessage(message + e.native);
+    sendMessage(message + e.native);
   };
 
-  const handleSentMessage = () => {
-    setChatMessages({
-      message,
-      receiver: 'bot',
-      sender: 'user',
-    });
-    setInputMessage('');
-    setStyle({ display: 'none', position: 'absolute' });
-
-    setTimeout(() => {
-      setChatMessages({
-        message: 'Hello there!',
-        receiver: 'user',
-        sender: 'bot',
-      });
-    }, 1000);
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    sendMessage(props.activeFriend, message, files)
+    setMessage('')
+    setFiles(null)
   };
 
   return (
@@ -60,7 +49,7 @@ export const ChatMessage = props => {
 
       <div className="chat-message">
         <textarea placeholder="message" onChange={handleChange} value={message}></textarea>
-        <Button className="chat-send-button" onClick={handleSentMessage}>
+        <Button className="chat-send-button" onClick={handleSendMessage}>
           <IconSend size={iconSize} />
         </Button>
       </div>

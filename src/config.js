@@ -1,6 +1,6 @@
 const dev = {
   appengine: {
-    host: '192.168.1.182:3300',
+    host: 'http://localhost:3300',
     method: 'http',
   },
 };
@@ -14,7 +14,7 @@ const prod = {
 
 const appConfig = {
   MAX_ATTACHMENT_SIZE: 5000000,
-  siteId: 'sitename',
+  siteId: 'localhost',
   useAppEngine: true,
   ...(process.env.REACT_APP_STAGE === 'prod' ? prod : dev),
 };

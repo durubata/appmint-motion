@@ -1,9 +1,10 @@
 import React from 'react';
 import { ScWelcomeConvo, ScwelcomeNewChat, ScSvg } from './styles/style';
-import { useViewStore } from '../../views-store';
-import { WelcomesearchHelp } from '.';
 import { IconSends } from 'components/icons';
 import { Button } from '@mui/material';
+import { useChatStore } from 'chat-store';
+import { useNavigate } from 'react-router-dom';
+import { WelcomeSearchHelp } from './welcome-search-help';
 
 const PreviousChat = [
   {
@@ -20,8 +21,8 @@ const PreviousChat = [
   },
 ];
 
-const WelcomeConvo = () => {
-  const { setScreenItem } = useViewStore(state => state);
+export const WelcomeConvo = () => {
+  const navigate = useNavigate()
   return (
     <ScWelcomeConvo>
       <div className="previous-chat">
@@ -29,7 +30,7 @@ const WelcomeConvo = () => {
           <ScwelcomeNewChat
             key={id}
             onClick={() => {
-              setScreenItem('Chat');
+              navigate('/chat');
             }}
           >
             <img className="chat-image" src={image} alt="avatart" />
@@ -41,9 +42,9 @@ const WelcomeConvo = () => {
           </ScwelcomeNewChat>
         ))}
       </div>
-      <WelcomesearchHelp />
+      <WelcomeSearchHelp />
       <div className="new-conversation">
-        <Button onClick={() => setScreenItem('Registration')} variant="contained" className="primary__button" color="success" startIcon={<IconSends />} fullWidth>
+        <Button onClick={() => navigate('/register')} variant="contained" className="primary__button" color="success" startIcon={<IconSends />} fullWidth>
           New Conversation
         </Button>
       </div>
@@ -51,4 +52,3 @@ const WelcomeConvo = () => {
   );
 };
 
-export default WelcomeConvo;

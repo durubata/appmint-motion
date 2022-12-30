@@ -12,5 +12,3 @@ export const WelcomeHeader = () => {
         </ScWelcomeHeader>
     );
 }
-
-export default WelcomeHeader;

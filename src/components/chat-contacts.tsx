@@ -1,22 +1,22 @@
 import React from 'react';
 import profileImage from 'assets/img_1292.jpg';
-import { fakeUsers } from '../fakedata';
+import { useChatStore } from 'chat-store';
 
 export const ChatContacts = () => {
+  const { conversations, startConversation } = useChatStore(state => state)
+
   return (
     <div className="chat-contacts">
-      {fakeUsers.map(user => (
-        <div className="chat-contact">
-          <div className="chat-contact-image">
-            <img src={profileImage} alt="profile-img" />
+      {Object.keys(conversations).map(key => {
+
+        const conversation = conversations[key]
+        return (
+          <div className="chat-contact" onClick={e => startConversation(key)}>
+            <div className="chat-contact-name">{key}</div>
+            <div className="chat-contact-email">{conversation.length}</div>
           </div>
-          <div>
-            <div className="chat-contact-name">{user.name}</div>
-            <div className="chat-contact-email">{user.email}</div>
-            <div className="chat-contact-location">{user.country}</div>
-          </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   );
 };

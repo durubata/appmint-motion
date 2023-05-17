@@ -1,19 +1,18 @@
 import { ChatMessage } from './chat-message';
 import { ChatHistory } from './chat-history';
-import { SCConvo, SCSearch } from 'styles';
 import { useState } from 'react';
 
 export const ChatConvo = () => {
   const [search] = useState();
 
-  const handleChange = e => {};
+  const handleChange = e => { };
   return (
-    <SCConvo>
-      <SCSearch>
+    <div>
+      <div>
         <input type="text" value={search} placeholder="Search" onChange={handleChange} />
-      </SCSearch>
+      </div>
       <ChatHistory />
       <ChatMessage />
-    </SCConvo>
+    </div>
   );
 };

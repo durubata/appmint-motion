@@ -8,9 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   const { setFormItems, setStateItem } = useChatStore(state => ({ setStateItem: state.setStateItem, setFormItems: state.setFormItems }));
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+
+  const [name, setName] = useState('jac');
+  const [email, setEmail] = useState('jjc@gmail.com');
+  const [phone, setPhone] = useState('243ddd');
   const [error, setError] = useState();
 
   const navigate = useNavigate()
@@ -18,9 +19,11 @@ const Registration = () => {
   const startChat = async (e) => {
     e.preventDefault();
     setError(null)
+
+
     setFormItems({ email, name, phone });
 
-    const authURL = `${appConfig.appengine.host}/user/guest/auth`
+    const authURL = `${appConfig.appengine.host}/profile/guest/auth`
     const settings = {
       method: 'POST',
       headers: {
@@ -33,7 +36,7 @@ const Registration = () => {
     const authResponse: any = await fetch(authURL, settings);
     if ([200, 201, 202].includes(authResponse.status)) {
       const response = await authResponse.json();
-      setStateItem({ token: response.token, user: response.guest })
+      setStateItem({ token: response.token, user: response.guest, navigate })
       navigate('/chat');
     } else {
       console.log(authResponse)

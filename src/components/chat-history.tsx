@@ -1,55 +1,52 @@
 import React, { useEffect, useRef } from 'react';
-import { SCChatBubble, SCHisotry } from 'styles';
-import { ChatContactSideBar } from './sidebar-contact';
-import { ChatInfo } from './sidebar-info';
-import { ChatMessage, useMessageStore } from 'chat-store';
-
+import { useChatStore } from 'chat-store';
 const status = ['pending', 'delivered', 'read', 'error'];
 export const ChatHistory = () => {
-  const { chatMessages } = useMessageStore(state => state);
+  const { hasUpdate, activeFriend, getMessages, user } = useChatStore(state => state);
   const messagesColumnRef = useRef(null);
+  const [messages, setMessages] = React.useState<any[]>([]);
 
-  const messages = chatMessages.map(({ message }) => message);
   useEffect(() => {
-    messagesColumnRef.current.scrollTop = messagesColumnRef.current.scrollHeight;
-  }, [messages]);
+    setMessages(getMessages(activeFriend))
+  }, [hasUpdate]);
 
   const getChatMessages = () => {
-    return chatMessages.map((message: ChatMessage) => {
-      if (message.sender === 'bot') {
+    return messages?.map((message: any) => {
+      console.log(message);
+      if (message.data.from === user.data.email) {
         return (
-          <SCChatBubble key={message.messageId}>
+          <div key={message.messageId}>
             <div className={`bubble-left`}>
               <div className="chats">
-                {message.message}
-                <span className="chat-time">{message.time}</span>
+                {message.data.content}
+                <span className="chat-time">{message.data.time}</span>
+                <span className="chat-time">{message.data.status}</span>
               </div>
             </div>
             <div className="bubble-spacer"></div>
-          </SCChatBubble>
+          </div>
         );
       } else {
         return (
-          <SCChatBubble key={message.messageId}>
+          <div key={message.messageId}>
             <div className="bubble-spacer"></div>
-            <div className={`bubble-right message-${message ? status[1] : null}`}>
+            <div className={`bubble-right`}>
               <div className="chats">
-                {message.message}
-                {message.file}
-                <span className="chat-time">{message.time}</span>
+                {message.data.content}
+                <span className="chat-time">{message.data.time}</span>
+                <span className="chat-time">{message.data.status}</span>
               </div>
             </div>
-          </SCChatBubble>
+          </div>
         );
       }
     });
   };
   return (
-    <SCHisotry ref={messagesColumnRef}>
+    <div ref={messagesColumnRef}>
       <div className="chat-history-scroll">
-        {/* {getChageMessages()} */}
         {getChatMessages()}
       </div>
-    </SCHisotry>
+    </div>
   );
 };

@@ -14,8 +14,9 @@ import { RiSendPlaneFill } from 'react-icons/ri';
 import { MdOutlineScreenShare } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
 import { MdMoreVert } from 'react-icons/md';
+import { GrConnect } from 'react-icons/gr';
 import { MdOndemandVideo } from 'react-icons/md';
-import {MdOutlineArrowForwardIos} from 'react-icons/md';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import SendIcon from '@mui/icons-material/Send';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -43,7 +44,6 @@ export {
   MdOndemandVideo as IconVideo,
   MdOutlineArrowForwardIos as IconForward,
   SendIcon as IconSends,
-  SearchIcon as IconSearchs
- 
-
+  SearchIcon as IconSearchs,
+  GrConnect as IconConnect
 };

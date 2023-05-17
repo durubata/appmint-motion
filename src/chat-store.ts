@@ -1,7 +1,7 @@
-import { getTime, greetings } from './utils';
-import produce from 'immer';
+import { produce } from 'immer';
 import { FILETYPE } from 'components/chat-message';
-import create from 'zustand';
+import { create } from 'zustand';
+import { getTime, greetings } from 'constants/utils';
 interface FormItems {
   name: string;
   email: string;
@@ -50,6 +50,7 @@ interface UserProps {
 
 interface ChatStoreProps {
   user?: any;
+  sidebarOpen?: boolean;
   token?: any;
   sidebar?: string;
   messages?: any;
@@ -77,6 +78,9 @@ interface ChatStoreProps {
   getFriend?: (friendEmail) => any
   formItems?: FormItems;
   setFormItems?: (items: FormItems) => void;
+  sendMessage?: (to, message, files?) => any;
+  navigate?: any
+  startConversation?: (to) => any;
 }
 
 interface FileItemsProps {
@@ -99,7 +103,7 @@ export const useFileUploadStore = create<FileUploadStoreProps>(set => ({
 }));
 
 
-export const useChatStore = create<ChatStoreProps>((set, get) => ({
+export const useChatStore = create<ChatStoreProps>()((set, get) => ({
   contacts: {},
   groups: {},
   hasUpdate: [],
@@ -111,7 +115,8 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
   setStateItem: (item) => set((state) => { return { ...item } }),
   onMessage: (message) => set((state) => {
     const conversations = JSON.parse(JSON.stringify(state.conversations))
-    if (message.data.from === state.myEmail) {
+    let activeFriend;
+    if (message?.data.from === state.myEmail) {
       let messages = conversations[message.data.to]
       if (!Array.isArray(messages)) {
         conversations[message.data.to] = [message]
@@ -131,10 +136,9 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
         draft.push(message.data.to)
       })
       return { conversations, hasUpdate }
-    }
-
-    if (message.data.to === state.myEmail) {
+    } else if (message.data.to === state.myEmail) {
       let messages = conversations[message.data.from]
+      activeFriend = message.data.from
       if (!Array.isArray(messages)) {
         conversations[message.data.from] = [message]
         return { conversations }
@@ -148,7 +152,7 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
       const hasUpdate = produce(state.hasUpdate, draft => {
         draft.push(message.data.from)
       })
-      return { conversations, hasUpdate }
+      return { conversations, hasUpdate, activeFriend }
     }
   }),
 
@@ -168,14 +172,13 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
       return { conversations, hasUpdate }
     }
   }),
-
   onDelete: (data) => set(state => { return { message: data } }),
   onMessages: (messages: any[]) => set(state => {
     const conversations = produce(state.conversations, draft => {
       messages.map((message: any) => {
         if (message.data.from !== state.myEmail) {
           if (draft[message.data.from]) {
-            const index = draft[message.data.from].findIndex(item => item.sk === message.sk)
+            const index = draft[message.data.from].findIndex(item => item.sk === message.sk && item.data.sentTime === message.data.sentTime)
             if (index >= 0) {
               draft[message.data.from][index] = message
             } else {
@@ -186,7 +189,7 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
           }
         } else {
           if (draft[message.data.to]) {
-            const index = draft[message.data.to].findIndex(item => item.sk === message.sk)
+            const index = draft[message.data.to].findIndex(item => item.sk === message.sk && item.data.sentTime === message.data.sentTime)
             if (index >= 0) {
               draft[message.data.to][index] = message
             } else {
@@ -203,14 +206,18 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
   startConversation: (friendEmail: string) => set(state => ({ activeFriend: friendEmail })),
   getMessages: (friendEmail: string) => get().conversations[friendEmail],
   sendMessage: (to: string, content: string, files) => set((state) => {
-    if (!state.activeFriend) {
-      to = 'init-guest-chat'
+    if (!get().user) {
+      get().navigate('/register')
+    }
+
+    if (!to) {
+      to = state.activeFriend || 'init-guest-chat'
     }
 
     const time = (new Date()).getTime()
     const newMessage = createData()
     newMessage.data = {
-      to: to || 'guest-chat',
+      to,
       content,
       files,
       status: 'pending',
@@ -227,7 +234,22 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
     return { conversations }
   }),
   chatRequest: () => {
-    get().socket.emit('chatRequest', { type: 'init-guest-chat', from: get().user.data.email });
+    if (!get().user) {
+      get().navigate('/register')
+    }
+
+    const time = (new Date()).getTime()
+    const newMessage = createData()
+    newMessage.data = {
+      type: 'init-guest-chat',
+      to: 'guest-chat',
+      content: 'chat-request',
+      status: 'pending',
+      from: get().user.data.email,
+      sentTime: time,
+    };
+    get().socket.emit('chatRequest', newMessage);
+
   },
   addFriend: (friend) => set(state => {
     const friends = produce(state.friends, draft => {
@@ -245,46 +267,6 @@ export const useChatStore = create<ChatStoreProps>((set, get) => ({
   setFormItems: (items: FormItems) => set(state => ({ formItems: items })),
 }));
 
-export interface ChatMessage {
-  sender: string;
-  message?: string;
-  time?: string;
-  receiver: string;
-  messageId?: number;
-  file?: JSX.Element;
-}
-
-interface MessageProps {
-  chatMessages: ChatMessage[];
-  setChatMessages: (chatMessage: ChatMessage) => void;
-}
-
-export const useMessageStore = create<MessageProps>(set => ({
-  chatMessages: [
-    {
-      message: greetings(),
-      messageId: Math.floor(Math.random() * 1000000),
-      time: getTime(),
-      receiver: 'user',
-      sender: 'bot',
-    },
-  ],
-  setChatMessages: ({ message, receiver, sender, file }) =>
-    set(state => ({
-      chatMessages: [
-        ...state.chatMessages,
-        {
-          message,
-          messageId: Math.floor(Math.random() * 1000000),
-          time: getTime(),
-          receiver,
-          sender,
-          file,
-        },
-      ],
-    })),
-}));
-
 
 const createData = () => {
   const newData: ChatMessageProps = {
@@ -293,7 +275,7 @@ const createData = () => {
     datatype: 'chatmessage',
     data: {},
     isnew: true,
-    version: 0
+    version: 0,
   };
   return newData;
 }

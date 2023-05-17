@@ -6,7 +6,6 @@ import { IconChat, IconContact, IconProfile, IconUser, IconUsers } from './icons
 import clsx from 'clsx';
 import { ChatContacts } from './chat-contacts';
 import { ChatInfo } from './sidebar-info';
-import { SCActionButton, SCSearch, SCSideBar } from 'styles';
 import { useChatStore } from 'chat-store';
 
 const iconSize = 14;
@@ -26,31 +25,31 @@ export const ChatContactSideBar = () => {
     console.log(sidebarOpen)
   }
   return (
-    <SCSideBar style={{ right: sidebarOpen ? -440 : -80 }} >
+    <div className=' transition absolute w-[400px] top-[80px] bg-white h-full p-2 shadow' style={{ right: !sidebarOpen ? -440 : -80 }} >
       <div className="chat-contact-sidebar-header">
-        {!sidebarOpen && (
-          <SCActionButton>
-            <IconButton title="Contact" className={clsx({ active: activeTab === 0 })} onClick={() => setActiveTab(0)} ><IconContact size={iconSize} /></IconButton>
-            <IconButton title="Group" className={clsx({ active: activeTab === 1 })} onClick={() => setActiveTab(1)} ><IconUsers size={iconSize} /></IconButton>
-            <IconButton title="Profile" className={clsx({ active: activeTab === 2 })} onClick={() => setActiveTab(2)} ><IconProfile size={iconSize} /></IconButton>
-          </SCActionButton>
+        {sidebarOpen && (
+          <div>
+            <IconButton title="Contact" className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={() => setActiveTab(0)} ><IconContact size={iconSize} /></IconButton>
+            <IconButton title="Group" className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={() => setActiveTab(1)} ><IconUsers size={iconSize} /></IconButton>
+            <IconButton title="Profile" className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={() => setActiveTab(2)} ><IconProfile size={iconSize} /></IconButton>
+          </div>
 
         )}
         <div className='chat-contact-toggle-button'>
           <IconButton title="Contact" onClick={handleClose} >{sidebarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon />}</IconButton>
         </div>
       </div>
-      {!sidebarOpen && (
+      {sidebarOpen && (
         <>
-          <SCSearch>
-            <input type="text" value={searhKey} placeholder="Search" onChange={handleChange} />
-          </SCSearch>
+          <div className='w-full'>
+            <input className='w-full p-2 border-2' type="text" value={searhKey} placeholder="Search" onChange={handleChange} />
+          </div>
           <div className='chat-sidebar-content'>
             {activeTab == 0 && <ChatContacts />}
             {activeTab == 1 && <ChatInfo />}
           </div>
         </>
       )}
-    </SCSideBar>
+    </div>
   )
 };

@@ -1,6 +1,5 @@
 import { IconButton, Button } from '@mui/material';
-import { IconAttachment, IconEmoji, IconSend, IconScreenShare } from './icons';
-import { SCActionButton, SCMessage } from 'styles';
+import { IconAttachment, IconEmoji, IconSend, IconScreenShare, IconConnect } from './icons';
 import { useChatStore } from 'chat-store';
 import React, { useState, useRef } from 'react';
 import FileUpload from './FileUpload/fileUpload';
@@ -16,7 +15,7 @@ export const ChatMessage = props => {
   const [files, setFiles] = useState<{ path: string, url?: string }[]>(props.files);
   const [message, setMessage] = useState('');
 
-  const { sendMessage } = useChatStore((state: any) => ({ sendMessage: state.sendMessage }));
+  const { sendMessage, chatRequest } = useChatStore(state => state);
 
   const handleChange = (e: any) => {
     setMessage(e.target.value);
@@ -31,7 +30,7 @@ export const ChatMessage = props => {
   };
 
   const handleEmojiValue = (e: any) => {
-    sendMessage(message + e.native);
+    sendMessage('', message + e.native);
   };
 
   const handleSendMessage = (e) => {
@@ -41,30 +40,38 @@ export const ChatMessage = props => {
     setFiles(null)
   };
 
+  const handleConnect = (e) => {
+    chatRequest();
+  };
+
   return (
-    <SCMessage>
+    <div className='w-full h-145px  absolute bottom-0 left-0 border-t-indigo-100 border-t-2'>
       <div style={style} className="emoji">
         <Picker data={data} onEmojiSelect={handleEmojiValue} onFocus="true" previewPosition="none" theme="light" />
       </div>
 
       <div className="chat-message">
-        <textarea placeholder="message" onChange={handleChange} value={message}></textarea>
+        <textarea placeholder="message" rows={4} onChange={handleChange} value={message}></textarea>
         <Button className="chat-send-button" onClick={handleSendMessage}>
           <IconSend size={iconSize} />
         </Button>
       </div>
-      <SCActionButton>
-        <IconButton onClick={handelEmojiButton}>
+      <div>
+        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={handelEmojiButton}>
           <IconEmoji size={iconSize} />{' '}
         </IconButton>
-        <IconButton aria-label="upload file" component="label">
+        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' aria-label="upload file" component="label">
           <FileUpload />
           <IconAttachment size={iconSize} />
         </IconButton>
-        <IconButton>
+        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600'>
           <IconScreenShare size={iconSize} />
         </IconButton>
-      </SCActionButton>
-    </SCMessage>
+        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={handleConnect} >
+          <IconConnect size={iconSize} />
+        </IconButton>
+      </div >
+    </div>
   );
 };
+

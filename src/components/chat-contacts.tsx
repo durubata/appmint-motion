@@ -1,5 +1,3 @@
-import React from 'react';
-import profileImage from 'assets/img_1292.jpg';
 import { useChatStore } from 'chat-store';
 
 export const ChatContacts = () => {

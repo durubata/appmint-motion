@@ -7,9 +7,9 @@ export const ChatConvo = () => {
 
   const handleChange = e => { };
   return (
-    <div>
-      <div>
-        <input type="text" value={search} placeholder="Search" onChange={handleChange} />
+    <div className='w-full h-full'>
+      <div className=' w-full bg-white p-2 mb-1 shadow '>
+        <input className=' w-full bg-white px-2 ' type="text" value={search} placeholder="Search" onChange={handleChange} />
       </div>
       <ChatHistory />
       <ChatMessage />

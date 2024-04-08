@@ -13,10 +13,14 @@ export const ChatHeader = () => {
     }
   }
 
+  const profileImage = user?.data?.portrait?.url || `https://ui-avatars.com/api/?name=${activeFriend}&background=random&color=fff&size=128&rounded=true&bold=true&length=1`;
   return (
     <div className='h-[60px] overflow-hidden bg-gray-100 flex justify-between p-2 shadow'>
-      <div className='flex justify-center text-center gap-2'>
-        <div className="profile-name">{activeFriend}</div>
+      <div className="chat-profile-card-smal flex gap-2 items-center text-xs">
+        <div className="profile-card-image w-8 h-8">
+          <img src={profileImage} />
+        </div>
+        <div className="profile-card-username">{activeFriend}</div>
       </div>
       <div >
         <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600'><IconAddUser size={iconSize} /></IconButton>

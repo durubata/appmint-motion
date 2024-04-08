@@ -4,7 +4,7 @@ import { MdMoreHoriz } from 'react-icons/md';
 import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
 import { ImProfile } from 'react-icons/im';
 import { ImUsers } from 'react-icons/im';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaArrowLeft } from 'react-icons/fa';
 import { MdContacts } from 'react-icons/md';
 import { MdChat } from 'react-icons/md';
 import { MdOutlineAttachFile } from 'react-icons/md';
@@ -45,5 +45,6 @@ export {
   MdOutlineArrowForwardIos as IconForward,
   SendIcon as IconSends,
   SearchIcon as IconSearchs,
-  GrConnect as IconConnect
+  GrConnect as IconConnect,
+  FaArrowLeft as IconBack
 };

@@ -50,8 +50,8 @@ export const ChatMessage = props => {
         <Picker data={data} onEmojiSelect={handleEmojiValue} onFocus="true" previewPosition="none" theme="light" />
       </div>
 
-      <div className="chat-message">
-        <textarea placeholder="message" rows={4} onChange={handleChange} value={message}></textarea>
+      <div className="chat-message p-2 flex">
+        <textarea placeholder="message" rows={2} onChange={handleChange} value={message} className='w-full px-2 py-1'></textarea>
         <Button className="chat-send-button" onClick={handleSendMessage}>
           <IconSend size={iconSize} />
         </Button>

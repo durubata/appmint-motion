@@ -45,10 +45,7 @@ export const ChatPage = () => {
   }, [socket]);
 
   return (
-    <div className='w-[400px] h-[800px] fixed bottom-0 right-10 border-[1px] border-gray-100 bg-gray-50 overflow-hidden shadow-md' >
-      <button onClick={() => { navigate('/'); }} >
-        Go to Home
-      </button>
+    <div className='w-full h-full' >
       <ChatHeader />
       <ChatConvo />
       <ChatContactSideBar />

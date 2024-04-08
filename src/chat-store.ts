@@ -2,6 +2,9 @@ import { produce } from 'immer';
 import { FILETYPE } from 'components/chat-message';
 import { create } from 'zustand';
 import { getTime, greetings } from 'constants/utils';
+import { v4 as uuidv4 } from 'uuid';
+
+
 interface FormItems {
   name: string;
   email: string;
@@ -10,10 +13,11 @@ interface FormItems {
   sk?: string;
   pk?: string;
   datatype?: string;
-  isnew?: boolean;
+  isNew?: boolean;
   version?: number
   data?: {
     content?: string;
+    uuid?: string;
     template?: string;
     title?: string;
     type?: string;
@@ -125,7 +129,7 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
 
       let messageIndex = messages.findIndex(item => item.sk === message.sk)
       if (messageIndex < 0) {
-        messageIndex = messages.findIndex(item => (item.data.sentTime === message.data.sentTime && item.data.to === message.data.to))
+        messageIndex = messages.findIndex(item => (item.data.uuid === message.data.uuid))
       }
       if (messageIndex >= 0) {
         messages[messageIndex] = message
@@ -217,6 +221,7 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
     const time = (new Date()).getTime()
     const newMessage = createData()
     newMessage.data = {
+      uuid: uuidv4(),
       to,
       content,
       files,
@@ -231,7 +236,7 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
       }
     })
     get().socket.emit('sendMessage', newMessage);
-    return { conversations }
+    return { conversations, timestamp: Date.now() }
   }),
   chatRequest: () => {
     if (!get().user) {
@@ -245,7 +250,7 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
       to: 'guest-chat',
       content: 'chat-request',
       status: 'pending',
-      from: get().user.data.email,
+      from: get().user?.data.email,
       sentTime: time,
     };
     get().socket.emit('chatRequest', newMessage);
@@ -274,7 +279,7 @@ const createData = () => {
     sk: '',
     datatype: 'chatmessage',
     data: {},
-    isnew: true,
+    isNew: true,
     version: 0,
   };
   return newData;

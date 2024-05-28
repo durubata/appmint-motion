@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "es6"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,7 +14,7 @@
     "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "strictNullChecks": false,
     "resolveJsonModule": true,
@@ -26,9 +27,16 @@
       "resize-observer-browser",
       "webpack-env", "jest", "node"
     ],
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "outDir": "./dist",
   },
   "include": [
-    "src"
-  ]
+    "src/**/*"
+  ],
+   "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+   ]
 }
+

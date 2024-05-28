@@ -17,10 +17,8 @@ import { MdMoreVert } from 'react-icons/md';
 import { GrConnect } from 'react-icons/gr';
 import { MdOndemandVideo } from 'react-icons/md';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
-import SendIcon from '@mui/icons-material/Send';
-import SearchIcon from '@mui/icons-material/Search';
-
-
+import { IoSearch } from "react-icons/io5";
+import { RiMailSendLine } from "react-icons/ri";
 
 
 
@@ -43,8 +41,8 @@ export {
   MdMoreVert as IconMoreV,
   MdOndemandVideo as IconVideo,
   MdOutlineArrowForwardIos as IconForward,
-  SendIcon as IconSends,
-  SearchIcon as IconSearchs,
+  RiMailSendLine as IconSends,
+  IoSearch as IconSearchs,
   GrConnect as IconConnect,
   FaArrowLeft as IconBack
 };

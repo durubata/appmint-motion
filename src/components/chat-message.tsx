@@ -1,10 +1,10 @@
-import { IconButton, Button } from '@mui/material';
-import { IconAttachment, IconEmoji, IconSend, IconScreenShare, IconConnect } from './icons';
 import { useChatStore } from 'chat-store';
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import FileUpload from './FileUpload/fileUpload';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { IconAttachment, IconEmoji, IconConnect } from './icons';
+
 
 export type FILETYPE = 'video' | 'image' | 'application';
 const iconSize = 16;
@@ -29,11 +29,11 @@ export const ChatMessage = props => {
     }
   };
 
-  const handleEmojiValue = (e: any) => {
-    sendMessage('', message + e.native);
+  const handleEmojiValue = (e) => {
+    setMessage(message + e.native);
   };
 
-  const handleSendMessage = (e) => {
+  const onSendMessage = (e) => {
     e.preventDefault();
     sendMessage(props.activeFriend, message, files)
     setMessage('')
@@ -44,33 +44,71 @@ export const ChatMessage = props => {
     chatRequest();
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      onSendMessage(event)
+    }
+  };
+
   return (
-    <div className='w-full h-145px  absolute bottom-0 left-0 border-t-indigo-100 border-t-2'>
+    <div className="flex items-start space-x-4 m-2">
       <div style={style} className="emoji">
         <Picker data={data} onEmojiSelect={handleEmojiValue} onFocus="true" previewPosition="none" theme="light" />
       </div>
-
-      <div className="chat-message p-2 flex">
-        <textarea placeholder="message" rows={2} onChange={handleChange} value={message} className='w-full px-2 py-1'></textarea>
-        <Button className="chat-send-button" onClick={handleSendMessage}>
-          <IconSend size={iconSize} />
-        </Button>
+      <div className="flex-shrink-0">
+        <img
+          className="inline-block h-10 w-10 rounded-full"
+          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt=""
+        />
       </div>
-      <div>
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={handelEmojiButton}>
-          <IconEmoji size={iconSize} />{' '}
-        </IconButton>
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' aria-label="upload file" component="label">
-          <FileUpload />
-          <IconAttachment size={iconSize} />
-        </IconButton>
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600'>
-          <IconScreenShare size={iconSize} />
-        </IconButton>
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={handleConnect} >
-          <IconConnect size={iconSize} />
-        </IconButton>
-      </div >
+      <div className="min-w-0 flex-1">
+        <div className="relative">
+          <div className="overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 ">
+            <textarea
+              rows={1}
+              name="comment"
+              onChange={handleChange}
+              value={message}
+              onKeyPress={handleKeyPress}
+              id="comment"
+              className="block w-full p-2 resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400  sm:text-sm sm:leading-6 focus:outline-none focus:ring-0"
+              placeholder="Type something..."
+            />
+
+            <div className="py-2" aria-hidden="true">
+              <div className="py-px">
+                <div className="h-9" />
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute inset-x-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
+            <div className="flex items-center space-x-5">
+              <button className='rounded-xl  hover:scale-150 transition-all duration-150' onClick={handelEmojiButton}>
+                <IconEmoji size={iconSize} />
+              </button>
+              <button className='rounded-xl hover:scale-150 transition-all duration-150' aria-label="upload file">
+                <FileUpload />
+                <IconAttachment size={iconSize} />
+              </button>
+              <button className='rounded-xl  hover:scale-150 transition-all duration-150' onClick={handleConnect} >
+                <IconConnect size={iconSize} />
+              </button>
+            </div>
+            <div className="flex-shrink-0">
+              <button
+                type="submit"
+                onClick={onSendMessage}
+                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

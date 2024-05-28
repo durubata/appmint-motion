@@ -1,8 +1,6 @@
-import React from 'react'
-import { ScWelcomeFooter } from './styles/style'
-
 export const WelcomeFooter = () => {
   return (
-    <ScWelcomeFooter>WelcomeFooter</ScWelcomeFooter>
+    <div className=' absolute bottom-0 text-center w-full p-4 '>WelcomeFooter</div>
   )
 }
+

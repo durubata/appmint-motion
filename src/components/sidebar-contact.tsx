@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { AppBar, IconButton, Toolbar } from '@mui/material';
-import { IconChat, IconContact, IconProfile, IconUser, IconUsers } from './icons';
-import clsx from 'clsx';
+import React, { useEffect, useState } from 'react';
+import { IconContact, IconProfile, IconUsers } from './icons';
 import { ChatContacts } from './chat-contacts';
 import { ChatInfo } from './sidebar-info';
 import { useChatStore } from 'chat-store';
+import { IoMdArrowBack, IoMdArrowForward } from 'react-icons/io';
 
 const iconSize = 14;
 
@@ -14,42 +11,33 @@ export const ChatContactSideBar = () => {
   const { setStateItem, sidebarOpen } = useChatStore((state: any) => ({ setStateItem: state.setStateItem, sidebarOpen: state.sidebarOpen }), (ov, nv) => false)
 
   const [activeTab, setActiveTab] = useState(0);
-  const [searhKey, setSearchKey] = useState('')
+  const [searchKey, setSearchKey] = useState('')
 
   const handleChange = (e) => {
     setSearchKey(e.target.value())
   }
-
   const handleClose = (e) => {
     setStateItem({ sidebarOpen: !sidebarOpen })
-    console.log(sidebarOpen)
   }
   return (
-    <div className=' transition absolute w-[400px] top-[80px] bg-white h-full p-2 shadow' style={{ right: !sidebarOpen ? -440 : -80 }} >
-      <div className="chat-contact-sidebar-header">
-        {sidebarOpen && (
-          <div>
-            <IconButton title="Contact" className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={() => setActiveTab(0)} ><IconContact size={iconSize} /></IconButton>
-            <IconButton title="Group" className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={() => setActiveTab(1)} ><IconUsers size={iconSize} /></IconButton>
-            <IconButton title="Profile" className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={() => setActiveTab(2)} ><IconProfile size={iconSize} /></IconButton>
-          </div>
-
-        )}
-        <div className='chat-contact-toggle-button'>
-          <IconButton title="Contact" onClick={handleClose} >{sidebarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon />}</IconButton>
+    <div className=' transition absolute w-80 top-16 bg-white h-[calc(100%-70px)] p-2 shadow duration-200' style={{ right: !sidebarOpen ? -440 : 0 }} >
+      <div className="chat-contact-sidebar-header mb-4">
+        <div className='flex gap-2 item-center justify-start' >
+          <button title="Contact" className='rounded-xl w-8 h-8 p-2 bg-gray-100 hover:scale-125 duration-100' onClick={handleClose} > <IoMdArrowForward /></button>
+          <button title="Contact" className='rounded-xl w-8 h-8 p-2 bg-gray-100 hover:scale-125 duration-100' onClick={() => setActiveTab(0)} ><IconContact size={iconSize} /></button>
+          <button title="Group" className='rounded-xl w-8 h-8 p-2 bg-gray-100 hover:scale-125 duration-100' onClick={() => setActiveTab(1)} ><IconUsers size={iconSize} /></button>
+          <button title="Profile" className='rounded-xl w-8 h-8 p-2 bg-gray-100 hover:scale-125 duration-100' onClick={() => setActiveTab(2)} ><IconProfile size={iconSize} /></button>
         </div>
       </div>
-      {sidebarOpen && (
-        <>
-          <div className='w-full'>
-            <input className='w-full p-2 border-2' type="text" value={searhKey} placeholder="Search" onChange={handleChange} />
-          </div>
-          <div className='chat-sidebar-content'>
-            {activeTab == 0 && <ChatContacts />}
-            {activeTab == 1 && <ChatInfo />}
-          </div>
-        </>
-      )}
+      <>
+        <div className='w-full'>
+          <input className='w-full py-1  px-2 border-2 rounded-xl text-xs' type="text" value={searchKey} placeholder="Search" onChange={handleChange} />
+        </div>
+        <div className='chat-sidebar-content text-sm'>
+          {activeTab == 0 && <ChatContacts />}
+          {activeTab == 1 && <ChatInfo />}
+        </div>
+      </>
     </div>
   )
 };

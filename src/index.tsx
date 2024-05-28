@@ -5,10 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { ChatApp } from 'App';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+const props: any = {
+  // Add any props you want to pass to the ChatApp component
+};
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ChatApp />
+      <ChatApp {...props} />
     </BrowserRouter>
   </React.StrictMode>,
 );

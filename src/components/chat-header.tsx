@@ -1,4 +1,3 @@
-import { IconButton } from '@mui/material';
 import { IconAddUser, IconMoreH, IconPhoneCall, IconVideoCall } from './icons';
 import { useChatStore } from 'chat-store';
 
@@ -22,11 +21,11 @@ export const ChatHeader = () => {
         </div>
         <div className="profile-card-username">{activeFriend}</div>
       </div>
-      <div >
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600'><IconAddUser size={iconSize} /></IconButton>
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600'><IconPhoneCall size={iconSize} /></IconButton>
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600'><IconVideoCall size={iconSize} /></IconButton>
-        <IconButton className='rounded-xl m-2 p-5 bg-white hover:bg-gray-600' onClick={e => handleClick('sidebar')}><IconMoreH size={iconSize} /></IconButton>
+      <div className='flex gap-2 item-center justify-between' >
+        <button className='rounded-xl w-8 h-8 p-2 bg-white hover:scale-125 duration-100'><IconAddUser size={iconSize} /></button>
+        <button className='rounded-xl w-8 h-8 p-2 bg-white hover:scale-125 duration-100'><IconPhoneCall size={iconSize} /></button>
+        <button className='rounded-xl w-8 h-8 p-2 bg-white hover:scale-125 duration-100'><IconVideoCall size={iconSize} /></button>
+        <button className='rounded-xl w-8 h-8 p-2 bg-white hover:scale-125 duration-100' onClick={e => handleClick('sidebar')}><IconMoreH size={iconSize} /></button>
       </div>
     </div>
   );

@@ -12,15 +12,20 @@ export const ChatPage = () => {
   const [socket, setSocket] = useState(null);
 
   const navigate = useNavigate()
-
   useEffect(() => {
-    const newSocket = io(
-      `${appConfig.appengine.host}/chat`, { auth: { token: 'Bearer ' + storeState.token, orgId: appConfig.siteId } }
-    );
-    newSocket.connect()
-    setSocket(newSocket);
-    return () => { newSocket.close() };
+    startChat()
+    return () => { socket?.close() };
   }, [setSocket]);
+
+  const startChat = async () => {
+    const newSocket = await io(
+      `${appConfig.appengine.host}/chat`, { auth: { token: 'Bearer ' + storeState.token, orgId: appConfig.orgId } }
+    );
+    await newSocket.connect()
+    console.log('connected')
+    setSocket(newSocket);
+    storeState.chatRequest();
+  }
 
   useEffect(() => {
     const myEmail = storeState.user?.data?.email;
@@ -31,6 +36,7 @@ export const ChatPage = () => {
       socket.on('messages', storeState.onMessages);
       socket.on('joinGroup', storeState.onJoinGroup);
       socket.on('leaveGroup', storeState.onLeaveGroup);
+      socket.on('error', storeState.onError);
       storeState.setStateItem({ socket, myEmail, navigate })
       storeState.chatRequest();
     }

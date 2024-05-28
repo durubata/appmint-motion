@@ -15,6 +15,15 @@ module.exports = {
   variants: {
     extend: {},
   },
+  safelist: [
+  'border-amber-400',
+  'border-blue-400',
+  'border-green-400',
+  'border-red-400',
+  'border-r-2',
+  'border-l-2',
+  'border-solid',
+  ],
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms')({

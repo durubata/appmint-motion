@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Button } from '@mui/material';
+import { IoMdArrowBack, IoMdArrowForward } from 'react-icons/io';
 
 export const ChatInfo = () => {
   const [close, setClose] = useState(false);
@@ -9,7 +7,7 @@ export const ChatInfo = () => {
   return (
     <div style={{ width: close ? 45 : 500 }} className="chat-info-sidebar">
       <div className='chat-info-toggle-button'>
-        <Button onClick={() => setClose(!close)}>{close ? <ArrowBackIcon /> : <ArrowForwardIcon />}</Button>
+        <button onClick={() => setClose(!close)}>{close ? <IoMdArrowBack /> : <IoMdArrowForward />}</button>
       </div>
       {close ? null : (
         <div className='content'>

@@ -22,7 +22,7 @@ export const ChatHistory = () => {
   };
 
   return (
-    <div ref={messagesColumnRef} className='w-full h-[calc(100%-210px)] overflow-auto p-2'>
+    <div ref={messagesColumnRef} className='w-full h-[calc(100%-140px)] overflow-auto p-2'>
       <div className="chat-history-scroll">
         {messages?.map((message: any) => {
           const messageId = message.sk?.length > 2 ? message.sk : message.data.uuid;

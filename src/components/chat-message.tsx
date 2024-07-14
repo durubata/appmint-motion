@@ -5,7 +5,6 @@ import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { IconAttachment, IconEmoji, IconConnect } from './icons';
 
-
 export type FILETYPE = 'video' | 'image' | 'application';
 const iconSize = 16;
 

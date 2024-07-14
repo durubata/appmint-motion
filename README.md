@@ -1,48 +1,112 @@
-# Getting Started with Create React App
+# Appmint Chat Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A flexible and easy-to-use chat client for React applications, designed to work with any Socket.IO-compatible backend.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [API Reference](#api-reference)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `yarn start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Real-time messaging using Socket.IO
+- Customizable UI components
+- Support for text, emojis, and file attachments
+- Typing indicators
+- Read receipts
+- User presence detection
+- Easily integrable with any Socket.IO backend
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `yarn test`
+Install the package using npm:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install react-chat-client
+```
 
-### `yarn build`
+Or using yarn:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+yarn add react-chat-client
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Here's a basic example of how to use the React Chat Client in your application:
 
-### `yarn eject`
+```jsx
+import React from 'react';
+import { AppmintChatClient } from '@appmint/chat';
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const App = () => {
+  return (
+    <AppmintChatClient
+      socketUrl="https://your-socket-server.com"
+      userId="user123"
+      username="John Doe"
+    />
+  );
+};
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export default App;
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Configuration
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The ChatClient component accepts the following props:
 
-## Learn More
+- `socketUrl` (required): The URL of your Socket.IO server
+- `userId` (required): The unique identifier for the current user
+- `username` (required): The display name of the current user
+- `theme` (optional): Custom theme object for styling
+- `onMessageSent` (optional): Callback function triggered when a message is sent
+- `onMessageReceived` (optional): Callback function triggered when a message is received
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## API Reference
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Appmint Chat Client
+
+The main component that renders the chat interface.
+
+Props:
+
+- `socketUrl: string` - The URL of the Socket.IO server
+- `userId: string` - The unique identifier for the current user
+- `username: string` - The display name of the current user
+- `theme?: object` - Custom theme object for styling
+- `onMessageSent?: (message: Message) => void` - Callback for sent messages
+- `onMessageReceived?: (message: Message) => void` - Callback for received messages
+
+### useChat
+
+A custom hook for integrating chat functionality into your own components.
+
+```jsx
+import { useChat } from '@appmint/chat';
+
+const MyComponent = () => {
+  const { messages, sendMessage, isTyping } = useAppmintChat({
+    socketUrl: 'https://your-socket-server.com',
+    userId: 'user123',
+    username: 'John Doe',
+  });
+
+  // Use the chat functionality in your component
+};
+```
+
+## Contributing
+
+We welcome contributions to the React Chat Client! Please see our [Contributing Guide](CONTRIBUTING.md) for more details on how to get started.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 npx tailwindcss -i ./src/styles/global.dev.css -o ./src/styles/global.css --watch

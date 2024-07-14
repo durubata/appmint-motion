@@ -85,6 +85,7 @@ interface ChatStoreProps {
   chatId?: string;
   theme?: string;
   language?: string;
+  isChatOpen?: boolean;
   onMessage?: (data) => any
   onUpdate?: (data) => any
   onDelete?: (data) => any

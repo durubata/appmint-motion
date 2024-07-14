@@ -20,7 +20,7 @@ export const ChatContactSideBar = () => {
     setStateItem({ sidebarOpen: !sidebarOpen })
   }
   return (
-    <div className=' transition absolute w-80 top-16 bg-white h-[calc(100%-70px)] p-2 shadow duration-200' style={{ right: !sidebarOpen ? -440 : 0 }} >
+    <div className='transition-all absolute w-80 top-[50px] bg-white h-[calc(100%-51px)] p-2 shadow duration-200' style={{ right: !sidebarOpen ? -440 : 0 }} >
       <div className="chat-contact-sidebar-header mb-4">
         <div className='flex gap-2 item-center justify-start' >
           <button title="Contact" className='rounded-xl w-8 h-8 p-2 bg-gray-100 hover:scale-125 duration-100' onClick={handleClose} > <IoMdArrowForward /></button>

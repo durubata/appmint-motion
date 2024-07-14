@@ -51,7 +51,7 @@ export const ChatPage = () => {
   }, [socket]);
 
   return (
-    <div className='w-full h-full' >
+    <div className='w-full h-[calc(100%-60px)]' >
       <ChatHeader />
       <ChatConvo />
       <ChatContactSideBar />

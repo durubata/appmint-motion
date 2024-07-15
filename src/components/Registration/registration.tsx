@@ -2,19 +2,16 @@ import { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
 import { appConfig } from 'config';
 import { useChatStore } from 'chat-store';
-import { useNavigate } from 'react-router-dom';
 import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
 
 const Registration = () => {
-  const { setFormItems, setStateItem } = useChatStore(state => ({ setStateItem: state.setStateItem, setFormItems: state.setFormItems }));
+  const { setFormItems, setStateItem, navigate } = useChatStore(state => ({ setStateItem: state.setStateItem, setFormItems: state.setFormItems, navigate: state.navigate }));
 
   const [name, setName] = useState('jac');
   const [email, setEmail] = useState('imole@gmail.com');
   const [phone, setPhone] = useState('243ddd');
   const [message, setMessage] = useState('243ddd');
   const [error, setError] = useState('');
-
-  const navigate = useNavigate()
 
   const startChat = async (e) => {
     e.preventDefault();
@@ -50,7 +47,7 @@ const Registration = () => {
       const authResponse: any = await fetch(authURL, settings);
       if ([200, 201, 202].includes(authResponse.status)) {
         const response = await authResponse.json();
-        setStateItem({ token: response.token, user: response.guest, navigate })
+        setStateItem({ token: response.token, user: response.guest })
         navigate('/chat');
       } else {
         console.log(authResponse)

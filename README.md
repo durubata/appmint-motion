@@ -110,3 +110,6 @@ We welcome contributions to the React Chat Client! Please see our [Contributing 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 npx tailwindcss -i ./src/styles/global.dev.css -o ./src/styles/global.css --watch
+
+s3cmd put --recursive --acl-public /Users/_projects/db_git/chat-client/build/* s3://fundu-space-sfo3-dev/appmint-chat/
+s3cmd del --recursive s3://fundu-space-sfo3-dev/appmint-chat/

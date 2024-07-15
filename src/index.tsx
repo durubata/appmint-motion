@@ -1,21 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
-import { ChatApp } from 'App';
+import ChatApp from 'app';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+// Function to initialize the app
+function initializeApp(container: HTMLElement, config: any) {
+  const root = ReactDOM.createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <ChatApp {...config} />
+    </React.StrictMode>
+  );
+}
 
-const props: any = {
-  // Add any props you want to pass to the ChatApp component
+// Expose the initialization function globally
+(window as any).AppmintChatClient = {
+  init: initializeApp
 };
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ChatApp {...props} />
-    </BrowserRouter>
-  </React.StrictMode>,
-);
+
+// Initialize the app if it's running standalone
+if (document.getElementById('root')) {
+  const props: any = {
+    // Add any props you want to pass to the ChatApp component, orgId, chatId, token, theme, language
+  };
+  initializeApp(document.getElementById('root') as HTMLElement, props);
+}
 
 const md: any = module;
 if (md.hot) {

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && node update-script-hashes.js",
+    "postbuild": "cp -r public/* build/",
     "test": "react-scripts test",
     "prettify": "prettier --write \"src/**/*.ts\"  \"src/**/*.tsx\" \"test/**/*.ts\"",
     "eject": "react-scripts eject",
@@ -39,7 +40,6 @@
     "react-i18next": "^12.2.2",
     "react-icons": "^4.8.0",
     "react-images-viewer": "^1.7.1",
-    "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.6.1",
     "typescript": "^5.4.5",

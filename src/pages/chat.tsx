@@ -5,13 +5,11 @@ import { ChatContactSideBar } from 'components/sidebar-contact';
 import io from 'socket.io-client';
 import { useChatStore } from 'chat-store';
 import { appConfig } from 'config';
-import { useNavigate } from 'react-router-dom';
 
 export const ChatPage = () => {
   const storeState = useChatStore(state => state);
   const [socket, setSocket] = useState(null);
 
-  const navigate = useNavigate()
   useEffect(() => {
     startChat()
     return () => { socket?.close() };
@@ -37,7 +35,7 @@ export const ChatPage = () => {
       socket.on('joinGroup', storeState.onJoinGroup);
       socket.on('leaveGroup', storeState.onLeaveGroup);
       socket.on('error', storeState.onError);
-      storeState.setStateItem({ socket, myEmail, navigate })
+      storeState.setStateItem({ socket, myEmail })
       storeState.chatRequest();
     }
     return () => {

@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom';
 import { HelpPage } from 'pages/help';
 import { SettingPage } from 'pages/setting';
 import { WelcomePage } from 'pages/welcome';
@@ -6,15 +5,13 @@ import { ChatPage } from 'pages/chat';
 import { ChatRegistrationPage } from 'pages/registration';
 import 'styles/global.css';
 import { IconBack } from 'components/icons';
-import { useNavigate } from 'react-router-dom';
 import { useChatStore } from 'chat-store';
 import { useEffect, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { classNames } from 'helpers';
 
 export const ChatApp = ({ orgId, chatId, token, theme, language }) => {
-  const navigate = useNavigate();
-  const { setStateItem, isChatOpen } = useChatStore()
+  const { setStateItem, isChatOpen, activePath, navigate } = useChatStore()
   const [showChat, setShowChat] = useState(false)
 
   useEffect(() => {
@@ -36,21 +33,24 @@ export const ChatApp = ({ orgId, chatId, token, theme, language }) => {
         setStateItem({ isChatOpen: true })
       }, 50)
     }
-
   }
+
+  const componentPaths = {
+    '/': WelcomePage,
+    '/register': ChatRegistrationPage,
+    '/chat': ChatPage,
+    '/help': HelpPage,
+    '/setting': SettingPage
+  }
+
+  const Component = componentPaths[activePath] || WelcomePage
 
   return (
     <div className={classNames('fixed bottom-20 right-10 w-fit h-fit')}>
       {showChat && (
         <div className={classNames((isChatOpen) ? 'h-[800px]' : 'h-0', 'w-[400px]  shadow-md rounded-2xl overflow-hidden border-[1px] transition-all duration-200')}>
           <header className="App-header"></header>
-          <Routes>
-            <Route path="/" element={<WelcomePage />} />
-            <Route path="/register" element={<ChatRegistrationPage />} />
-            <Route path="/chat" element={<ChatPage />} />
-            <Route path="/help" element={<HelpPage />} />
-            <Route path="/setting" element={<SettingPage />} />
-          </Routes>
+          <Component />
         </div>
       )}
       <div className='buttons'>

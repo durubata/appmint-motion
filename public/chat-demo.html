@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AppmintChat Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/favicon.ico" type="image/x-icon">
+  <link rel="icon" sizes="16x16" href="https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/logo_mini.png" type="image/png">
+  <link rel="icon" sizes="32x32" href="https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/logo_mini.png" type="image/png">
+</head>
+<body>
+  <div id="my-chat-container"></div> <!-- Ensure this div is present for chat container -->
+
+  <script>
+    function initializeChat() {
+      AppmintChat.init({
+        containerId: 'my-chat-container', // optional
+        orgId: 'your-org-id',
+        chatId: 'your-chat-id',
+        token: 'your-token',
+        theme: 'light', // or 'dark'
+        language: 'en' // or any other supported language
+      });
+    }
+
+    function handleError() {
+      console.error("Failed to load the AppmintChat script.");
+    }
+  </script>
+
+  <!-- Load external script, ensure initializeChat and handleError are defined above this script -->
+  <script src="https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/appmint-chat.js" onload="initializeChat()" onerror="handleError()"></script>
+  
+</body>
+</html>

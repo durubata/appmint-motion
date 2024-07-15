@@ -3,8 +3,8 @@ import { FILETYPE } from 'components/chat-message';
 import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 
-const messageAudio = new Audio('/sounds/message.mp3');
-const callAudio = new Audio('/sounds/call.mp3');
+const messageAudio = new Audio('https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/sounds/message.mp3');
+// const callAudio = new Audio('https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/sounds/call.mp3');
 const playSound = () => {
   messageAudio.play()
     .then(() => {
@@ -78,9 +78,9 @@ interface ChatStoreProps {
   myEmail?: string;
   activeFriend?: string,
   timestamp: {}
+  activePath?: string;
   newitem?: string[],
   formItems?: FormItems;
-  navigate?: any
   orgId?: string;
   chatId?: string;
   theme?: string;
@@ -104,6 +104,7 @@ interface ChatStoreProps {
   startConversation?: (to) => any;
   updateMessageStatus?: (message: any, status: string) => any;
   getMessage?: (conversationId: string, messageId) => any;
+  navigate?: (path: string) => any;
 }
 
 interface FileItemsProps {
@@ -136,6 +137,7 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
   conversations: {},
   newitem: [],
   friends: {},
+  activePath: '/',
   setStateItem: (item) => set((state) => { return { ...item } }),
   emit: (key, message) => {
     const socket = get().socket;
@@ -144,6 +146,9 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
     } else {
       console.error('Trying to reconnect, try again soon')
     }
+  },
+  navigate: (path) => {
+    set({ activePath: path })
   },
   updateMessageStatus: (message: any, status: string) => {
     const statusUpdate = { type: 'message-status', from: message.data.from, to: message.data.to, uid: message.sk, status };

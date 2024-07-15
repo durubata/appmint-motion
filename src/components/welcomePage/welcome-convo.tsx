@@ -1,5 +1,5 @@
+import { useChatStore } from 'chat-store';
 import { IconSends } from 'components/icons';
-import { useNavigate } from 'react-router-dom';
 
 const PreviousChat = [
   {
@@ -24,7 +24,8 @@ const PreviousChat = [
 ];
 
 export const WelcomeConvo = () => {
-  const navigate = useNavigate()
+  const navigate = useChatStore((state) => state.navigate);
+
   return (
     <div className='convo'>
       <div className="previous-chat">

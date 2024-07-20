@@ -1,10 +1,11 @@
 import { produce } from 'immer';
-import { FILETYPE } from 'components/chat-message';
 import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
+import { FILETYPE } from 'utils';
 
 const messageAudio = new Audio('https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/sounds/message.mp3');
 // const callAudio = new Audio('https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/sounds/call.mp3');
+
 const playSound = () => {
   messageAudio.play()
     .then(() => {
@@ -19,7 +20,9 @@ interface FormItems {
   name: string;
   email: string;
   phone: string;
-}interface ChatMessageProps {
+}
+
+interface ChatMessageProps {
   sk?: string;
   pk?: string;
   datatype?: string;

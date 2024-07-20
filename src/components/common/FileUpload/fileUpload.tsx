@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFileUploadStore, useChatStore } from 'chat-store';
-import { FILETYPE } from 'components/chat-message';
+import { FILETYPE } from 'utils';
 
 const FileUpload = () => {
   const { setFileItem, fileItems } = useFileUploadStore(state => state);

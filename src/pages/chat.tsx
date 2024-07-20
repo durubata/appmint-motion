@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ChatConvo } from '../components/chat-convo';
-import { ChatHeader } from 'components/chat-header';
-import { ChatContactSideBar } from 'components/sidebar-contact';
 import io from 'socket.io-client';
 import { useChatStore } from 'chat-store';
 import { appConfig } from 'config';
+import { ChatHeader } from 'components/chat/chat-header';
+import { ChatConvo } from 'components/chat/chat-convo';
+import { ChatContactSideBar } from 'components/chat/sidebar-contact';
 
 export const ChatPage = () => {
   const storeState = useChatStore(state => state);

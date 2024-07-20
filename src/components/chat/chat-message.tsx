@@ -1,15 +1,14 @@
-import { useChatStore } from 'chat-store';
 import { useState, useRef } from 'react';
-import FileUpload from './FileUpload/fileUpload';
+import FileUpload from '../common/FileUpload/fileUpload';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
-import { IconAttachment, IconEmoji, IconConnect } from './icons';
+import { IconAttachment, IconEmoji, IconConnect } from '../common/icons';
+import { useChatStore } from 'chat-store';
+import { Popover } from 'components/common/popover';
 
-export type FILETYPE = 'video' | 'image' | 'application';
 const iconSize = 16;
 
 export const ChatMessage = props => {
-  const [style, setStyle] = useState<any>({ display: 'none', position: 'absolute' });
   const ref = useRef();
   const [files, setFiles] = useState<{ path: string, url?: string }[]>(props.files);
   const [message, setMessage] = useState('');
@@ -18,14 +17,6 @@ export const ChatMessage = props => {
 
   const handleChange = (e: any) => {
     setMessage(e.target.value);
-  };
-
-  const handelEmojiButton = e => {
-    if (style.display === 'none') {
-      setStyle({ display: 'block', position: 'absolute', bottom: '100px', right: '0' });
-    } else {
-      setStyle({ display: 'none', position: 'absolute' });
-    }
   };
 
   const handleEmojiValue = (e) => {
@@ -52,9 +43,6 @@ export const ChatMessage = props => {
 
   return (
     <div className="flex items-start space-x-4 m-2">
-      <div style={style} className="emoji">
-        <Picker data={data} onEmojiSelect={handleEmojiValue} onFocus="true" previewPosition="none" theme="light" />
-      </div>
       <div className="flex-shrink-0">
         <img
           className="inline-block h-10 w-10 rounded-full"
@@ -85,9 +73,12 @@ export const ChatMessage = props => {
 
           <div className="absolute inset-x-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
             <div className="flex items-center space-x-5">
-              <button className='rounded-xl  hover:scale-150 transition-all duration-150' onClick={handelEmojiButton}>
-                <IconEmoji size={iconSize} />
-              </button>
+              <Popover className={''} position='context' content={<Picker data={data} onEmojiSelect={handleEmojiValue} onFocus="true" previewPosition="none" theme="light" />} >
+                <button className='rounded-xl  hover:scale-150 transition-all duration-150' title="Button">
+                  <IconEmoji size={iconSize} />
+                </button>
+              </Popover>
+
               <button className='rounded-xl hover:scale-150 transition-all duration-150' aria-label="upload file">
                 <FileUpload />
                 <IconAttachment size={iconSize} />

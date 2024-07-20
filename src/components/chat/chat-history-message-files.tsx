@@ -1,4 +1,4 @@
-import { imgExts, videoExts } from 'helpers';
+import { imgExts, videoExts } from 'utils';
 import React, { useEffect, useState } from 'react';
 import { RiFileDownloadLine } from 'react-icons/ri';
 

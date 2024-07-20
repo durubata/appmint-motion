@@ -3,7 +3,7 @@ import { ChatNodeHTML } from './node-html';
 import { ChatNodeForm } from './node-form';
 import { ChatNodeChoice } from './node-choice';
 import { ChatNodeCard } from './node-card';
-import { statusLClasses, statusRClasses } from 'helpers';
+import { statusLClasses } from 'utils';
 
 export const ChatNodeRenderer = (props) => {
     const { sendMessage } = useChatStore(state => state)

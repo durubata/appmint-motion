@@ -1,7 +1,7 @@
 import { ChatMessage } from './chat-message';
 import { ChatHistory } from './chat-history';
 import { useState } from 'react';
-import { IconSearch } from './icons';
+import { IconSearch } from '../common/icons';
 
 export const ChatConvo = () => {
   const [search] = useState();

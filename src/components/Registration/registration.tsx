@@ -47,7 +47,8 @@ const Registration = () => {
       const authResponse: any = await fetch(authURL, settings);
       if ([200, 201, 202].includes(authResponse.status)) {
         const response = await authResponse.json();
-        setStateItem({ token: response.token, user: response.guest })
+        console.log(response.guest.email)
+        setStateItem({ token: response.token, user: response.guest, myEmail: response.guest.email });
         navigate('/chat');
       } else {
         console.log(authResponse)

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && node update-script-hashes.js",
+    "build:dev": "react-scripts build && node update-script-hashes.js",
+    "build": "REACT_APP_STAGE=prod react-scripts build && node update-script-hashes.js",
     "postbuild": "cp -r public/* build/",
     "test": "react-scripts test",
     "prettify": "prettier --write \"src/**/*.ts\"  \"src/**/*.tsx\" \"test/**/*.ts\"",
@@ -43,6 +44,7 @@
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.6.1",
     "typescript": "^5.4.5",
+    "ua-parser-js": "^1.0.38",
     "web-vitals": "^3.3.1",
     "zustand": "^4.3.8"
   },

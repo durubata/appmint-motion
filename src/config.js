@@ -1,14 +1,11 @@
 const dev = {
   appengine: {
     host: 'http://localhost:3300',
-    method: 'http',
   },
 };
-
 const prod = {
   appengine: {
-    host: 'appengine.appmint.io',
-    method: 'https',
+    host: 'https://appengine.appmint.io',
   },
 };
 

@@ -1,4 +1,4 @@
-import { IconAddUser, IconPhoneCall, IconVideoCall } from './icons';
+import { IconAddUser, IconPhoneCall, IconVideoCall } from '../common/icons';
 import { useChatStore } from 'chat-store';
 
 const iconSize = 14;

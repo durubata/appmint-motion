@@ -1,7 +1,7 @@
 import { useChatStore } from 'chat-store';
 import { ChatHistoryMessageFile } from './chat-history-message-files';
 import { ChatNodeRenderer } from './node-renderer';
-import { statusLClasses, statusRClasses } from 'helpers';
+import { statusLClasses, statusRClasses } from 'utils';
 
 export const ChatHistoryMessage = ({ conversationId, message }) => {
   const { user } = useChatStore(state => state)

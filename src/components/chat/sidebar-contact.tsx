@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IconContact, IconProfile, IconUsers } from './icons';
+import { IconContact, IconProfile, IconUsers } from '../common/icons';
 import { ChatContacts } from './chat-contacts';
 import { ChatInfo } from './sidebar-info';
 import { useChatStore } from 'chat-store';

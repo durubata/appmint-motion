@@ -4,11 +4,11 @@ import { WelcomePage } from 'pages/welcome';
 import { ChatPage } from 'pages/chat';
 import { ChatRegistrationPage } from 'pages/registration';
 import 'styles/global.css';
-import { IconBack } from 'components/icons';
+import { IconBack } from 'components/common/icons';
 import { useChatStore } from 'chat-store';
 import { useEffect, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { classNames } from 'helpers';
+import { classNames } from 'utils';
 
 export const ChatApp = ({ orgId, chatId, token, theme, language }) => {
   const { setStateItem, isChatOpen, activePath, navigate } = useChatStore()

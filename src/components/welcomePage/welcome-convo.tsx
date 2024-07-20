@@ -1,5 +1,5 @@
 import { useChatStore } from 'chat-store';
-import { IconSends } from 'components/icons';
+import { IconSends } from 'components/common/icons';
 
 const PreviousChat = [
   {

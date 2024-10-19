@@ -6,12 +6,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build:dev": "react-scripts build && node update-script-hashes.js",
-    "build": "REACT_APP_STAGE=prod react-scripts build && node update-script-hashes.js",
+    "build": "REACT_APP_STAGE=prod  react-scripts build && node update-script-hashes.js",
     "postbuild": "cp -r public/* build/",
+    "prebuild": "yarn tailwind:build",
     "test": "react-scripts test",
     "prettify": "prettier --write \"src/**/*.ts\"  \"src/**/*.tsx\" \"test/**/*.ts\"",
     "eject": "react-scripts eject",
-    "build:lib": "rollup -c rollup.config.mjs"
+    "build:lib": "rollup -c rollup.config.mjs",
+    "tailwind:build": "npx tailwindcss -i src/styles/global.dev.css -o src/styles/global.css"
   },
   "dependencies": {
     "@emoji-mart/data": "^1.1.2",
@@ -26,6 +28,7 @@
     "@types/node": "^20.1.3",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "bson": "^6.8.0",
     "emoji-mart": "^5.5.2",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",

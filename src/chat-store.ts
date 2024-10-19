@@ -2,6 +2,7 @@ import { produce } from 'immer';
 import { create } from 'zustand';
 import { v4 as uuidv4 } from 'uuid';
 import { FILETYPE } from 'utils';
+import { ObjectId } from 'bson';
 
 const messageAudio = new Audio('https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/sounds/message.mp3');
 // const callAudio = new Audio('https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/sounds/call.mp3');
@@ -294,8 +295,8 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
 
     const time = (new Date()).getTime()
     const newMessage = createData()
+    newMessage.sk = (new ObjectId()).toString();
     newMessage.data = {
-      uuid: uuidv4(),
       to,
       content,
       files,

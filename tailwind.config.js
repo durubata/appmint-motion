@@ -4,10 +4,7 @@ const plugin = require('tailwindcss/plugin');
 module.exports = {
   mode: 'jit',
   // purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  purge: {
-    enabled: false, // Disable PurgeCSS
-    content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  },
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {},

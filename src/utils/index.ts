@@ -1,7 +1,3 @@
-export function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
-}
-
 export type FILETYPE = 'video' | 'image' | 'application';
 
 export const imgExts = ['png', 'jpg', 'gif', 'svg', 'tif', 'tiff', 'webp', 'bmp', 'jpeg'];
@@ -38,4 +34,8 @@ export const greetings = () => {
 
 export const getTime = () => {
     return new Date().toLocaleTimeString().toLocaleString();
+}
+
+export function classNames(...classes: any) {
+    return classes.filter(Boolean).join(' ')
 }

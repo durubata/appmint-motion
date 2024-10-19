@@ -18,7 +18,7 @@
 
       // Load the main chunk
       var scripts = [
-        'https://fundu-space-sfo3-dev.sfo3.cdn.digitaloceanspaces.com/appmint-chat/static/js/main.js'
+        'https://files.appmint.space/appmint-chat/static/js/main.js'
       ];
 
       function loadScript(index) {

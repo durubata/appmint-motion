@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { IoMdSend } from 'react-icons/io';
 import { appConfig } from 'config';
 import { useChatStore } from 'chat-store';
-import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import { EnvelopeIcon } from '@heroicons/react/24/outline'
 
 const Registration = () => {
   const { setFormItems, setStateItem, navigate } = useChatStore(state => ({ setStateItem: state.setStateItem, setFormItems: state.setFormItems, navigate: state.navigate }));

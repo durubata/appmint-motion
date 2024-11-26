@@ -17,7 +17,7 @@ export const ChatPage = () => {
 
   const startChat = async () => {
     const newSocket = await io(
-      `${appConfig.appengine.host}/chat`, { auth: { token: 'Bearer ' + storeState.token, orgId: appConfig.orgId } }
+      `${appConfig.appengine.host}/chat`, { auth: { token: 'Bearer ' + storeState.token, orgId: storeState.orgId } }
     );
     await newSocket.connect()
     console.log('connected')

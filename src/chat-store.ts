@@ -90,6 +90,9 @@ interface ChatStoreProps {
   theme?: string;
   language?: string;
   isChatOpen?: boolean;
+  appKey?: string;
+  appId?: string;
+  chatConfig?: any;
   onMessage?: (data) => any
   onUpdate?: (data) => any
   onDelete?: (data) => any
@@ -294,7 +297,7 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
     }
 
     const time = (new Date()).getTime()
-    const newMessage = createData()
+    const newMessage = createBaseData()
     newMessage.sk = (new ObjectId()).toString();
     newMessage.data = {
       to,
@@ -319,7 +322,7 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
     }
     const { orgId, chatId, token, theme, language } = get()
     const time = (new Date()).getTime()
-    const newMessage = createData()
+    const newMessage = createBaseData()
     newMessage.data = {
       type: 'init-guest-chat',
       to: `${chatId}@mintflow.${orgId}`,//'askgpt.node-tspxkfq1@askgpt.demo', //`start@chatId.mintflow`,
@@ -351,14 +354,25 @@ export const useChatStore = create<ChatStoreProps>()((set, get) => ({
 }));
 
 
-const createData = () => {
-  const newData: ChatMessageProps = {
+export const createBaseData = (datatype = 'chatmessage') => {
+  const newData: any = {
     pk: '',
     sk: '',
-    datatype: 'chatmessage',
+    datatype,
     data: {},
     isNew: true,
     version: 0,
   };
   return newData;
+}
+
+export const getResponseErrorMessage = (e, noStatusCode = false) => {
+  console.error('error', e)
+  let errMsg = e.response?.data?.message || e.response?.data?.error;
+  let errPath = e.response?.data?.path
+  let message = errMsg + ' ' + errPath + ' ' + (noStatusCode ? '' : e.message)
+  if (message.indexOf('/') > 1) {
+    message = message.split('/')[0]
+  }
+  return message;
 }

@@ -11,9 +11,10 @@ const prod = {
 
 const appConfig = {
   MAX_ATTACHMENT_SIZE: 5000000,
-  orgId: '',
   useAppEngine: true,
   ...(process.env.REACT_APP_STAGE === 'prod' ? prod : dev),
 };
 
 export { appConfig };
+
+

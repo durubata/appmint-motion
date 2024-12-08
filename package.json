@@ -1,27 +1,46 @@
 {
-  "name": "appmint-motion",
+  "name": "@appmint/motion",
+  "author": "Jac Light",
   "version": "0.0.1",
-  "description": "I'll help you convert this content into clean markdown format. Let me organize it while preserving all the important information.",
-  "main": "index.js",
+  "description": "A lightweight motion library for React, powered by anime.js and TypeScript.",
+  "main": "dist/appmint-motion.cjs.js",
+  "module": "dist/appmint-motion.esm.js",
+  "unpkg": "dist/appmint-motion.umd.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jac Light",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-typescript": "^12.1.1",
     "@types/animejs": "^3.1.12",
-    "@types/react": "^19.0.1",
-    "@types/react-dom": "^19.0.1",
-    "animejs": "^3.2.2",
-    "react": "^19.0.0",
+    "@types/react": "^18.0.1",
+    "@types/react-dom": "^18.0.1",
     "rollup": "^2.79.2",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^5.7.2"
   },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
   "dependencies": {
+    "animejs": "^3.2.2",
     "tslib": "^2.8.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/durubata/appmint-motion.git"
+  },
+  "homepage": "https://github.com/durubata/appmint-motion",
+  "keywords": [
+    "react",
+    "animation",
+    "animejs",
+    "motion",
+    "typescript"
+  ]
 }

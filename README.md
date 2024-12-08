@@ -1,115 +1,218 @@
-# Appmint Chat Client
+I'll help you convert this content into clean markdown format. Let me organize it while preserving all the important information.
 
-A flexible and easy-to-use chat client for React applications, designed to work with any Socket.IO-compatible backend.
+# Appmint Motion
 
-## Table of Contents
-
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [API Reference](#api-reference)
-- [Contributing](#contributing)
-- [License](#license)
+Appmint Motion is a lightweight, flexible animation library powered by [anime.js](https://animejs.com/) that provides features similar to modern motion frameworks like Framer Motion. With Appmint Motion, you can create fluid, powerful animations for your web projects effortlessly. From scroll-based animations to complex SVG morphing, Appmint Motion has you covered.
 
 ## Features
 
-- Real-time messaging using Socket.IO
-- Customizable UI components
-- Support for text, emojis, and file attachments
-- Typing indicators
-- Read receipts
-- User presence detection
-- Easily integrable with any Socket.IO backend
+- **Animate Presence**: Seamlessly animate elements as they enter or exit the DOM.
+- **Scroll Animations**: Trigger animations when elements scroll into view.
+- **Parallax Effects**: Easily create parallax scrolling effects.
+- **Transforms**: Animate transforms like rotate, scale, and translate.
+- **Springs**: Use spring-based easing for smooth animations.
+- **Exit Animations**: Customize how elements leave the DOM.
+- **Layout Animations**: Handle layout changes with animations.
+- **Gestures**: Add gesture-based animations.
+- **Timelines**: Coordinate multiple animations with timelines.
+- **Staggering**: Add delays for staggered animations.
+- **Easing & Springs**: Use predefined easings or customize with springs.
+- **Morphing (SVG)**: Animate smooth morphing effects for SVGs.
 
 ## Installation
 
-Install the package using npm:
-
 ```bash
-npm install react-chat-client
+npm install appmint-motion
 ```
 
-Or using yarn:
+or
 
 ```bash
-yarn add react-chat-client
+yarn add appmint-motion
 ```
 
 ## Usage
 
-Here's a basic example of how to use the React Chat Client in your application:
+### Animate Presence
 
-```jsx
-import React from 'react';
-import { AppmintChatClient } from '@appmint/chat';
+```javascript
+import { animatePresence } from 'appmint-motion';
 
-const App = () => {
-  return (
-    <AppmintChatClient
-      socketUrl="https://your-socket-server.com"
-      userId="user123"
-      username="John Doe"
-    />
-  );
-};
-
-export default App;
+animatePresence({
+  target: '.my-element',
+  enter: {
+    opacity: [0, 1],
+    translateY: [20, 0],
+    duration: 500,
+  },
+  exit: {
+    opacity: [1, 0],
+    translateY: [0, 20],
+    duration: 500,
+  },
+});
 ```
 
-## Configuration
+### Scroll Animations
 
-The ChatClient component accepts the following props:
+```javascript
+import { animateOnScroll } from 'appmint-motion';
 
-- `socketUrl` (required): The URL of your Socket.IO server
-- `userId` (required): The unique identifier for the current user
-- `username` (required): The display name of the current user
-- `theme` (optional): Custom theme object for styling
-- `onMessageSent` (optional): Callback function triggered when a message is sent
-- `onMessageReceived` (optional): Callback function triggered when a message is received
+animateOnScroll({
+  target: '.my-scroll-element',
+  animation: {
+    opacity: [0, 1],
+    scale: [0.8, 1],
+    duration: 700,
+  },
+});
+```
 
-## API Reference
+### Parallax Effects
 
-### Appmint Chat Client
+```javascript
+import { parallaxEffect } from 'appmint-motion';
 
-The main component that renders the chat interface.
+parallaxEffect({
+  target: '.parallax-element',
+  speed: 0.5, // Speed multiplier for the parallax effect
+});
+```
 
-Props:
+### Transforms
 
-- `socketUrl: string` - The URL of the Socket.IO server
-- `userId: string` - The unique identifier for the current user
-- `username: string` - The display name of the current user
-- `theme?: object` - Custom theme object for styling
-- `onMessageSent?: (message: Message) => void` - Callback for sent messages
-- `onMessageReceived?: (message: Message) => void` - Callback for received messages
+```javascript
+import { animate } from 'appmint-motion';
 
-### useChat
+animate({
+  target: '.transform-element',
+  translateX: [0, 100],
+  rotate: [0, 360],
+  duration: 1000,
+});
+```
 
-A custom hook for integrating chat functionality into your own components.
+### Springs
 
-```jsx
-import { useChat } from '@appmint/chat';
+```javascript
+import { springAnimation } from 'appmint-motion';
 
-const MyComponent = () => {
-  const { messages, sendMessage, isTyping } = useAppmintChat({
-    socketUrl: 'https://your-socket-server.com',
-    userId: 'user123',
-    username: 'John Doe',
+springAnimation({
+  target: '.spring-element',
+  to: { scale: 1.2 },
+  stiffness: 100,
+  damping: 20,
+});
+```
+
+### Exit Animations
+
+```javascript
+import { exitAnimation } from 'appmint-motion';
+
+exitAnimation({
+  target: '.exit-element',
+  animation: {
+    opacity: [1, 0],
+    scale: [1, 0.5],
+    duration: 500,
+  },
+});
+```
+
+### Layout Animations
+
+```javascript
+import { layoutAnimation } from 'appmint-motion';
+
+layoutAnimation({
+  target: '.layout-container',
+  duration: 500,
+});
+```
+
+### Gestures
+
+```javascript
+import { gestureAnimation } from 'appmint-motion';
+
+gestureAnimation({
+  target: '.gesture-element',
+  onDrag: {
+    translateX: (distance) => distance,
+  },
+});
+```
+
+### Timelines
+
+```javascript
+import { createTimeline } from 'appmint-motion';
+
+const timeline = createTimeline();
+
+timeline
+  .add({
+    target: '.step1',
+    opacity: [0, 1],
+    duration: 500,
+  })
+  .add({
+    target: '.step2',
+    translateX: [0, 100],
+    duration: 500,
   });
-
-  // Use the chat functionality in your component
-};
 ```
 
-## Contributing
+### Staggering
 
-We welcome contributions to the React Chat Client! Please see our [Contributing Guide](CONTRIBUTING.md) for more details on how to get started.
+```javascript
+import { staggerAnimation } from 'appmint-motion';
+
+staggerAnimation({
+  target: '.stagger-elements',
+  animation: {
+    translateY: [20, 0],
+    opacity: [0, 1],
+    duration: 500,
+  },
+  delay: 100, // Delay between each element
+});
+```
+
+### Easing & Springs
+
+```javascript
+import { animate } from 'appmint-motion';
+
+animate({
+  target: '.easing-element',
+  translateX: [0, 100],
+  easing: 'spring(1, 100, 10, 0)',
+});
+```
+
+### Morphing (SVG)
+
+```javascript
+import { morphSVG } from 'appmint-motion';
+
+morphSVG({
+  target: '.svg-path',
+  from: 'M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80',
+  to: 'M10 80 C 40 120, 65 120, 95 80 S 150 10, 180 80',
+  duration: 1000,
+});
+```
+
+## API Documentation
+
+Explore the detailed API documentation in the official guide here.
+
+## Dependencies
+
+- anime.js
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-npx tailwindcss -i ./src/styles/global.dev.css -o ./src/styles/global.css --watch
-
-s3cmd put --recursive --acl-public /Users/_projects/db_git/chat-client/build/* s3://fundu-space-sfo3-dev/appmint-chat/
-s3cmd del --recursive s3://fundu-space-sfo3-dev/appmint-chat/
+This project is licensed under the MIT License.

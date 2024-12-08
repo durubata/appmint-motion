@@ -1,5 +1,3 @@
-I'll help you convert this content into clean markdown format. Let me organize it while preserving all the important information.
-
 # Appmint Motion
 
 Appmint Motion is a lightweight, flexible animation library powered by [anime.js](https://animejs.com/) that provides features similar to modern motion frameworks like Framer Motion. With Appmint Motion, you can create fluid, powerful animations for your web projects effortlessly. From scroll-based animations to complex SVG morphing, Appmint Motion has you covered.

@@ -1,42 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es6"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "target": "ES5",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "strictNullChecks": false,
-    "resolveJsonModule": true,
-    "baseUrl": "./src",
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "types": [
-      "reflect-metadata",
-      "resize-observer-browser",
-      "webpack-env", "jest", "node"
-    ],
-    "noImplicitAny": false,
-    "outDir": "./dist",
+    "declaration": true,
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react", // Enable JSX support for React
   },
-  "include": [
-    "src/**/*"
-  ],
-   "exclude": [
-    "node_modules",
-    "dist",
-    "build"
-   ]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
-
